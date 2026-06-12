@@ -10,20 +10,32 @@ class Cell:
         self.x = 0
         self.y = 0
         self.length = 50
-        self.height = 50
+        self.height = 80
         self.cells_list = []
 
     def draw(self):
-        for k in range(50):
-            for k in range(50):
+        while True:
+
+            if self.x + self.length <= self.screen.get_width():
                 uno_cell = pygame.draw.rect(self.screen, (100, 100, 100), (self.x, self.y, self.length, self.height))
                 self.cells_list.append(uno_cell)
                 self.x += self.length + 1
-            self.x = 0
-            self.y += self.length + 1
-        
-        self.y = 0
+
+            else:
+                self.x = 0
+                if self.y + self.height <= self.screen.get_height():
+                    uno_cell = pygame.draw.rect(self.screen, (100, 100, 100), (self.x, self.y, self.length, self.height))
+                    self.cells_list.append(uno_cell)
+                    self.y += self.height + 1
+                    # print('working')
+
+                else:
+                    print('working')
+                    self.y = 0
+                    break
             
+            
+        
         
         
 
@@ -35,11 +47,9 @@ class Cell:
 def main():
     pygame.init()
     pygame.display.set_caption("cells")
-    screen = pygame.display.set_mode((640, 480))
+    screen = pygame.display.set_mode((800, 600))
     test_cell = Cell(screen, 100, 100, )
     clock = pygame.time.Clock()
-
-
 
     while True:
         clock.tick(60)
@@ -50,7 +60,6 @@ def main():
         screen.fill((255, 255, 255))
         test_cell.draw()
     
-
 
         pygame.display.update()
 
