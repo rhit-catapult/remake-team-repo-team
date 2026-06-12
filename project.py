@@ -1,20 +1,21 @@
 import pygame
 import sys
 import my_character
+import play_button
 import random
 import time
 
 
 def main():
-    # turn on pygame
     pygame.init()
 
-    # create a screen
-    pygame.display.set_caption("Cool Project")
-    # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((640, 480))
+    
+    pygame.display.set_caption("Music Maker")
+    
+    screen = pygame.display.set_mode((800, 500))
     # creates a Character from the my_character.py file
     character = my_character.Character(screen, 100, 100)
+    button = play_button.Button(screen, 400, 400)
 
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -31,6 +32,7 @@ def main():
 
         # draws the character every frame
         character.draw()
+        button.draw()
 
         # TODO: Add your project code
 
