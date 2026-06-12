@@ -5,34 +5,33 @@ import pygame
 
 
 class Cell:
-    def __init__(self, screen: pygame.Surface, x, y):
+    def __init__(self, screen: pygame.Surface, x, y, color):
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.length = 50
+        self.length = 80
         self.height = 80
+        self.color = color
         self.cells_list = []
 
     def draw(self):
         while True:
 
-            if self.x + self.length <= self.screen.get_width():
-                uno_cell = pygame.draw.rect(self.screen, (100, 100, 100), (self.x, self.y, self.length, self.height))
-                self.cells_list.append(uno_cell)
-                self.x += self.length + 1
-
-            else:
-                self.x = 0
-                if self.y + self.height <= self.screen.get_height():
-                    uno_cell = pygame.draw.rect(self.screen, (100, 100, 100), (self.x, self.y, self.length, self.height))
+            if self.y + self.height <= self.screen.get_height():
+                if self.x + self.length <= self.screen.get_width():
+                    uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.length, self.height))
                     self.cells_list.append(uno_cell)
-                    self.y += self.height + 1
-                    # print('working')
+                    self.x += self.length + 1
 
                 else:
-                    print('working')
-                    self.y = 0
-                    break
+                    self.x = 0
+                    uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.length, self.height))
+                    self.cells_list.append(uno_cell)
+                    self.y += self.height + 1
+
+            else:
+                self.y = 0
+                break
             
             
         
@@ -48,7 +47,7 @@ def main():
     pygame.init()
     pygame.display.set_caption("cells")
     screen = pygame.display.set_mode((800, 600))
-    test_cell = Cell(screen, 100, 100, )
+    test_cell = Cell(screen, 100, 100, (30, 50, 100))
     clock = pygame.time.Clock()
 
     while True:
