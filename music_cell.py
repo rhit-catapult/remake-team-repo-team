@@ -9,8 +9,8 @@ class Cell:
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.width = 78
-        self.height = 78
+        self.width = 81
+        self.height = 81
         self.color = color
         self.cells_list = []
         
@@ -64,7 +64,7 @@ def main():
     pygame.init()
     pygame.display.set_caption("cells")
     screen = pygame.display.set_mode((780, 780))
-    cell_grid = Cell(screen, 100, 100, (30, 50, 100))
+    cell_grid = Cell(screen, 100, 100, (255, 255, 255))
     clock = pygame.time.Clock()
 
     while True:
@@ -73,7 +73,7 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        screen.fill((255, 255, 255))
+        screen.fill((0, 0, 0))
         cell_grid.draw()
     
 
