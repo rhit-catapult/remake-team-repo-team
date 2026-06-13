@@ -9,14 +9,13 @@ class Cell:
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.width = 80
-        self.height = 80
+        self.width = 78
+        self.height = 78
         self.color = color
         self.cells_list = []
         
 
     # def draw(self):
-        # pass
         # while True:
 
         #     if self.y + self.height <= self.screen.get_height():
@@ -39,12 +38,18 @@ class Cell:
     def draw(self):
 
         blocks_horizontal, spacing_horizontal = divmod(self.screen.get_width(), self.width)
+        if spacing_horizontal == 0:
+            spacing_horizontal = self.width
+            blocks_horizontal -= 1
         self.x = spacing_horizontal / (blocks_horizontal + 1)
 
         blocks_vertical, spacing_vertical = divmod(self.screen.get_height(), self.height)
+        if spacing_vertical == 0:
+            spacing_vertical = self.height
+            blocks_vertical -= 1
         self.y = spacing_vertical / (blocks_vertical + 1)
 
-        
+
         for k in range(blocks_vertical):
             for k in range(blocks_horizontal):
                 uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
