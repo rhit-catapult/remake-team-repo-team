@@ -3,31 +3,31 @@ import sys
 
 
 class Button:
-    def __init__(self, screen: pygame.Surface, x, y, color, active_colour):
+    def __init__(self, screen: pygame.Surface, x, y, play):
         self.screen = screen
         self.x = x
         self.y = y
-        self.color = color
-        self.base_color = color
-        self.active_colour = active_colour
+        self.play_button = pygame.image.load(play)
+        self.base_play_button = pygame.image.load(play)
+        self.pause_button = pygame.image.load(play)
         self.pressed = False
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x - 350, self.y + 50), 20)
+        pygame.draw.self.play_button(self.screen, (self.x - 350, self.y + 50))
 
     def toggle(self):
         self.pressed = not self.pressed
         # self.color = self.active_colour if self.pressed else self.base_color
         if self.pressed:
-            self.color = self.active_colour
+            self.play_button = self.pause_button
         else:
-            self.color = self.base_color
+            self.play_button = self.base_play_button
         
 
 
 
-def play_button():
+def play_button_test():
     screen = pygame.display.set_mode((800, 500))
-    play_button = Button(screen, 400, 400, "gray", "red")
+    play_button_test = Button(screen, 400, 400)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,14 +35,14 @@ def play_button():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                distance = ((mouse_pos[0] - (play_button.x - 350)) ** 2 + (mouse_pos[1] - (play_button.y + 50)) ** 2) ** 0.5
+                distance = ((mouse_pos[0] - (play_button_test.x - 350)) ** 2 + (mouse_pos[1] - (play_button_test.y + 50)) ** 2) ** 0.5
                 if distance <= 20:
-                    play_button.toggle()
-        play_button.draw()
+                    play_button_test.toggle()
+        play_button_test.draw()
         
         
         pygame.display.update()
 
 
 if __name__ == "__main__":
-    play_button()
+    play_button_test()

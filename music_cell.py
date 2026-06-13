@@ -9,8 +9,8 @@ class Cell:
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.width = 81
-        self.height = 81
+        self.width = 100
+        self.height = 100
         self.color = color
         self.cells_list = []
         
@@ -41,30 +41,32 @@ class Cell:
         if spacing_horizontal == 0:
             spacing_horizontal = self.width
             blocks_horizontal -= 1
-        self.x = spacing_horizontal / (blocks_horizontal + 1)
+        # self.x = spacing_horizontal / (blocks_horizontal + 1)
 
-        blocks_vertical, spacing_vertical = divmod(self.screen.get_height(), self.height)
+        blocks_vertical, spacing_vertical = divmod(self.screen.get_height() - 200, self.height)
         if spacing_vertical == 0:
             spacing_vertical = self.height
             blocks_vertical -= 1
-        self.y = spacing_vertical / (blocks_vertical + 1)
+        # self.y = spacing_vertical / (blocks_vertical + 1)
+        self.x =0
+        self.y =0
 
-
+        print(blocks_vertical, " x ", blocks_horizontal)
         for k in range(blocks_vertical):
             for k in range(blocks_horizontal):
                 uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
                 self.cells_list.append(uno_cell)
-                self.x += self.width + (spacing_horizontal / (blocks_horizontal + 1))
-            self.x = spacing_horizontal / (blocks_horizontal + 1)
-            self.y += self.height + (spacing_vertical / (blocks_vertical + 1))
-        self.y = spacing_vertical / (blocks_vertical + 1)
+                self.x += self.width + (spacing_horizontal / (blocks_horizontal - 1))
+            self.x = 0
+            self.y += self.height + (spacing_vertical / (blocks_vertical - 1))
+        self.y = 0
         
 
 def main():
     pygame.init()
     pygame.display.set_caption("cells")
-    screen = pygame.display.set_mode((780, 780))
-    cell_grid = Cell(screen, 100, 100, (255, 255, 255))
+    screen = pygame.display.set_mode((1300, 680))
+    cell_grid = Cell(screen, 100, 100, (200, 50, 20))
     clock = pygame.time.Clock()
 
     while True:
@@ -73,7 +75,7 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        screen.fill((0, 0, 0))
+        screen.fill((255,255,255))
         cell_grid.draw()
     
 
