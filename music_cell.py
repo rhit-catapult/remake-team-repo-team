@@ -9,45 +9,57 @@ class Cell:
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.length = 80
+        self.width = 80
         self.height = 80
         self.color = color
         self.cells_list = []
+        
+
+    # def draw(self):
+        # pass
+        # while True:
+
+        #     if self.y + self.height <= self.screen.get_height():
+        #         if self.x + self.width <= self.screen.get_width():
+        #             uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+        #             self.cells_list.append(uno_cell)
+        #             self.x += self.width + 1
+
+        #         else:
+        #             self.x = 0
+        #             uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+        #             self.cells_list.append(uno_cell)
+        #             self.y += self.height + 1
+
+        #     else:
+        #         self.y = 0
+        #         break
+            
 
     def draw(self):
-        while True:
 
-            if self.y + self.height <= self.screen.get_height():
-                if self.x + self.length <= self.screen.get_width():
-                    uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.length, self.height))
-                    self.cells_list.append(uno_cell)
-                    self.x += self.length + 1
+        blocks_horizontal, spacing_horizontal = divmod(self.screen.get_width(), self.width)
+        self.x = spacing_horizontal / (blocks_horizontal + 1)
 
-                else:
-                    self.x = 0
-                    uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.length, self.height))
-                    self.cells_list.append(uno_cell)
-                    self.y += self.height + 1
+        blocks_vertical, spacing_vertical = divmod(self.screen.get_height(), self.height)
+        self.y = spacing_vertical / (blocks_vertical + 1)
 
-            else:
-                self.y = 0
-                break
-            
-            
         
+        for k in range(blocks_vertical):
+            for k in range(blocks_horizontal):
+                uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+                self.cells_list.append(uno_cell)
+                self.x += self.width + (spacing_horizontal / (blocks_horizontal + 1))
+            self.x = spacing_horizontal / (blocks_horizontal + 1)
+            self.y += self.height + (spacing_vertical / (blocks_vertical + 1))
+        self.y = spacing_vertical / (blocks_vertical + 1)
         
-        
-
-    # def clicked(self, screen):
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.MOUSEBUTTONDOWN:
-    #             click_position = pygame.mouse.get_pos()
 
 def main():
     pygame.init()
     pygame.display.set_caption("cells")
-    screen = pygame.display.set_mode((800, 600))
-    test_cell = Cell(screen, 100, 100, (30, 50, 100))
+    screen = pygame.display.set_mode((780, 780))
+    cell_grid = Cell(screen, 100, 100, (30, 50, 100))
     clock = pygame.time.Clock()
 
     while True:
@@ -57,7 +69,7 @@ def main():
                 sys.exit()
 
         screen.fill((255, 255, 255))
-        test_cell.draw()
+        cell_grid.draw()
     
 
         pygame.display.update()
