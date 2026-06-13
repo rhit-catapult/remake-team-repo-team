@@ -65,7 +65,7 @@ class Cell:
 def main():
     pygame.init()
     pygame.display.set_caption("cells")
-    screen = pygame.display.set_mode((1600, 1000))
+    screen = pygame.display.set_mode((1300, 680))
     cell_grid = Cell(screen, 100, 100, (200, 50, 20))
     clock = pygame.time.Clock()
 
