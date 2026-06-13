@@ -7,12 +7,12 @@ class Button:
         self.screen = screen
         self.x = x
         self.y = y
-        self.play_button = pygame.image.load(play)
-        self.base_play_button = pygame.image.load(play)
-        self.pause_button = pygame.image.load(play)
+        self.play_button = pygame.image.load("play.png")
+        self.base_play_button = pygame.image.load("play.png")
+        self.pause_button = pygame.image.load("play.png")
         self.pressed = False
     def draw(self):
-        pygame.draw.self.play_button(self.screen, (self.x - 350, self.y + 50))
+        self.screen.blit(self.play_button, (0, 0))
 
     def toggle(self):
         self.pressed = not self.pressed
