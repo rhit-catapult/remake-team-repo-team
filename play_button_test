@@ -9,11 +9,13 @@ class Button:
         self.y = y
         self.color = pygame.image.load("play.png")
         self.base_color = pygame.image.load("play.png")
-        self.active_color = pygame.image.load("play.png")
+        self.active_color = pygame.image.load("pause.png")
         self.pressed = False
+        self.rect = self.color.get_rect(center=(self.x - 340, self.y + 217))
 
     def draw(self):
-        self.screen.blit(self.color, (self.x - 350, self.y + 50))
+        self.screen.blit(self.color, self.rect)
+        
 
     def toggle(self):
         self.pressed = not self.pressed
@@ -22,6 +24,7 @@ class Button:
             self.color = self.active_color
         else:
             self.color = self.base_color
+        self.rect = self.color.get_rect(center=(self.x - 340, self.y + 217))
         
 
 
@@ -34,15 +37,11 @@ def play_button():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = pygame.mouse.get_pos()
-                distance = ((mouse_pos[0] - (play_button.x - 350)) ** 2 + (mouse_pos[1] - (play_button.y + 50)) ** 2) ** 0.5
-                if distance <= 20:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if play_button.rect.collidepoint(event.pos):
                     play_button.toggle()
-                    
         
         play_button.draw()
-        
         
         pygame.display.update()
 
