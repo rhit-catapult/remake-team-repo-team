@@ -1,7 +1,7 @@
 import pygame
 
 class Cells:
-    def __init__(self, screen, x, y, color=(0, 0, 0)):
+    def __init__(self, screen, x, y, color=(255, 255, 255)):
         self.screen = screen
         self.x = x
         self.y = y
@@ -28,4 +28,4 @@ class Cells:
         elif pos[1] < self.screen.get_height() and pos[1] > self.screen.get_height() * 7 / 8:
             self.color = (125, 125, 255)
         else:
-            self.color = (0, 0, 0)
+            self.color = (255, 255, 255)
