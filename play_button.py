@@ -26,7 +26,7 @@ class Button:
 
 
 def play_button():
-    screen = pygame.display.set_mode((800, 500))
+    screen = pygame.display.set_mode((1300, 680))
     play_button = Button(screen, 400, 400, "gray", "red")
     while True:
         for event in pygame.event.get():
