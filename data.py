@@ -9,6 +9,7 @@ class Data:
         self.number_of_beats = number_of_beats
         self.music_player = music_player.MusicPlayer()
         all_notes = []
+
         for beat in range(number_of_beats):
             one_beat = []
             for note in range(number_of_notes):
@@ -63,7 +64,11 @@ if __name__ == "__main__":
     data = Data(8, 16)
     data.click_at(0, 0)
     data.click_at(0, 3)        
-    data.click_at(4, 0)
+    data.click_at(0, 1)
+    data.click_at(0, 2)
+    data.click_at(0, 4)
+    data.click_at(0, 0)
+    data.click_at(0, 2)
     # data.click_at(0, 0)
     data.play()
 
