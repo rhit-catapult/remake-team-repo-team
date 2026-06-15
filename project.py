@@ -7,6 +7,7 @@ import time
 import data
 import music_cell
 import image_play_button
+import music_player
 
 
 def main():
@@ -21,6 +22,7 @@ def main():
     my_data = data.Data(8, 16)
     cell_grid = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
+
    
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -53,6 +55,7 @@ def main():
         cell_grid.draw()
         
         play_button.draw()
+        my_data.set_bpm(240)
 
        
         pygame.display.update()

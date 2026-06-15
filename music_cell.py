@@ -37,18 +37,20 @@ class Cell:
             
         
         self.y = 505
-        #color = pygame.Color("Blue")
+        drum_color = (10, 30, 200)
         
         for k in range(16):
             pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, 100))
-            # if not clicked
+
+            # if ____ == False:
             pygame.draw.circle(self.screen, pygame.Color("Gray"), (40 + self.x, 535), 8)
-            #else:
-                #pygame.draw.circle(self.screen, color, (40 + self.x, 535), 8)
-            #if not clicked:
+            #elif ___ == True:
+                #pygame.draw.circle(self.screen, drum_color, (40 + self.x, 535), 8)
+                
+            #if ____ == False:
             pygame.draw.polygon(self.screen, pygame.Color("Gray"), [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
-            #else:
-                #pygame.draw.polygon(self.screen, color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
+            #elif ___ == True:
+                #pygame.draw.polygon(self.screen, drum_color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
             
             self.x += self.width + (spacing_horizontal / 15)
     
