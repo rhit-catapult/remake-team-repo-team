@@ -18,7 +18,7 @@ class MousePosition:
     
     def find_grid_position(self):
         cell_width = self.screen.get_width() // 16  # Assuming 16 columns
-        cell_height = self.screen.get_height() // 8   # Assuming 8 rows
+        cell_height = 505 // 8   # Assuming 8 rows
         grid_x = self.x // cell_width
         grid_y = self.y // cell_height
         return grid_x, grid_y

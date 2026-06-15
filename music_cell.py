@@ -23,9 +23,9 @@ class Cell:
        
         for note_index in range(8):
             for beat_index in range(16):
-                if notes[beat_index][7 - note_index] == False:
+                if notes[beat_index][note_index] == False:
                     pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, self.height))
-                elif notes[beat_index][7 - note_index] == True:
+                elif notes[beat_index][note_index] == True:
                     pygame.draw.rect(self.screen, color[0 + next_color], (self.x, self.y, self.width, self.height))
                 self.x += self.width + (spacing_horizontal / 15)
             self.x = 0
@@ -74,5 +74,5 @@ def main():
         
 
         pygame.display.update()
-
-main()
+if __name__ == "__main__":
+    main()
