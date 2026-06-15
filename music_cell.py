@@ -8,7 +8,6 @@ class Cell:
     def __init__(self, screen: pygame.Surface, color):
         self.screen = screen
         self.color = color
-        self.cells_list = []
         
             
 
@@ -22,8 +21,7 @@ class Cell:
        
         for k in range(8):
             for k in range(16):
-                uno_cell = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
-                self.cells_list.append(uno_cell)
+                pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
                 self.x += self.width + (spacing_horizontal / 15)
             self.x = 0
             self.y += self.height + (spacing_vertical / 7)
