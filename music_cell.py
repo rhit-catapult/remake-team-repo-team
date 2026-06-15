@@ -1,46 +1,54 @@
 import sys
 import time
 import pygame
+from data import Data
 
 
 class Cell:
-    def __init__(self, screen: pygame.Surface, color):
+    def __init__(self, screen: pygame.Surface, data):
         self.screen = screen
-        self.color = color
+        self.data = data
           
     def draw(self):
+        color = [pygame.Color("Maroon"), pygame.Color("Orange"), pygame.Color("Yellow"), pygame.Color(" Dark Green"), pygame.Color("Teal"), pygame.Color("Blue"), pygame.Color("Purple")]
+        next_color = 0
         self.x = 0
-        self.y = 0
+        self.y = 1
         self.width = 80
         spacing_horizontal = 20
         self.height = 60
         spacing_vertical = 20
+
+        notes = self.data.get_all_notes()
        
-        for k in range(8):
-            for k in range(16):
-                # if clicked then:
-                pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
-                # if not clicked then:
-                #pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, self.height))
+        for note_index in range(8):
+            for beat_index in range(16):
+                if notes[beat_index][7 - note_index] == False:
+                    pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, self.height))
+                elif notes[beat_index][7 - note_index] == True:
+                    pygame.draw.rect(self.screen, color[0 + next_color], (self.x, self.y, self.width, self.height))
                 self.x += self.width + (spacing_horizontal / 15)
             self.x = 0
             self.y += self.height + (spacing_vertical / 7)
-            #move one data row down
-            #change self.color as rows increase
+            if next_color == 6:
+                next_color = 0
+            else:
+                next_color += 1
+            
         
         self.y = 505
-        #self.color = pygame.Color("Blue")
+        #color = pygame.Color("Blue")
         
         for k in range(16):
             pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, 100))
             # if not clicked
             pygame.draw.circle(self.screen, pygame.Color("Gray"), (40 + self.x, 535), 8)
             #else:
-                #pygame.draw.circle(self.screen, self.color, (40 + self.x, 535), 8)
+                #pygame.draw.circle(self.screen, color, (40 + self.x, 535), 8)
             #if not clicked:
             pygame.draw.polygon(self.screen, pygame.Color("Gray"), [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
             #else:
-                #pygame.draw.polygon(self.screen, self.color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
+                #pygame.draw.polygon(self.screen, color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
             
             self.x += self.width + (spacing_horizontal / 15)
     
@@ -51,7 +59,8 @@ def main():
     pygame.init()
     pygame.display.set_caption("cells")
     screen = pygame.display.set_mode((1300, 680))
-    cell_grid = Cell(screen, pygame.Color("White"))
+    my_data = Data(8, 16)
+    cell_grid = Cell(screen, my_data)
     clock = pygame.time.Clock()
 
     while True:
@@ -62,7 +71,7 @@ def main():
 
         screen.fill(pygame.Color("Black"))
         cell_grid.draw()
-    
+        
 
         pygame.display.update()
 
