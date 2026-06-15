@@ -4,7 +4,7 @@ import sys
 
 class Button:
     def __init__(self, screen: pygame.Surface, x, y):
-        IMAGE_SIZE = 90
+        IMAGE_SIZE = 70
         self.screen = screen
         self.x = x
         self.y = y
@@ -15,7 +15,7 @@ class Button:
         self.active_color = pygame.image.load("pause.png")
         self.active_color = pygame.transform.scale(self.active_color, (IMAGE_SIZE, IMAGE_SIZE))
         self.pressed = False
-        self.rect = self.color.get_rect(center=(self.x - 340, self.y + 220))
+        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
 
     def draw(self):
         self.screen.blit(self.color, self.rect)
@@ -28,7 +28,7 @@ class Button:
             self.color = self.active_color
         else:
             self.color = self.base_color
-        self.rect = self.color.get_rect(center=(self.x - 340, self.y + 220))
+        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
         
 
 
