@@ -15,7 +15,7 @@ class Instrument:
         self.instrument_sax = pygame.transform.scale(self.instrument_sax, (IMAGE_SIZE, IMAGE_SIZE))
         self.instrument_piano = pygame.image.load("piano_button.png")
         self.instrument_piano = pygame.transform.scale(self.instrument_piano, (IMAGE_SIZE, IMAGE_SIZE))
-        self.rect = self.instrument_violin.get_rect(center=(self.x - 300, self.y + 245))
+        self.rect = self.instrument_violin.get_rect(center=(self.x - 265, self.y + 245))
         self.possible_instruments = ["violin", "sax", "piano"]
         self.current_instrument = 0
 
@@ -30,40 +30,40 @@ class Instrument:
 
     def toggle(self):
         if self.current_instrument == 0:
-            self.rect = self.instrument_sax.get_rect(center=(self.x - 300, self.y + 245))
+            self.rect = self.instrument_sax.get_rect(center=(self.x - 265, self.y + 245))
             self.current_instrument = 1
 
         elif self.current_instrument == 1:
-            self.rect = self.instrument_piano.get_rect(center=(self.x - 300, self.y + 245))
+            self.rect = self.instrument_piano.get_rect(center=(self.x - 265, self.y + 245))
             self.current_instrument = 2
 
         elif self.current_instrument == 2:
-            self.rect = self.instrument_violin.get_rect(center=(self.x - 300, self.y + 245))
+            self.rect = self.instrument_violin.get_rect(center=(self.x -265, self.y + 245))
             self.current_instrument = 0
         
         print("self.current_instrument", self.current_instrument)
 
 
 
-def play_button():
+def instrument():
     screen = pygame.display.set_mode((1300, 680))
-    play_button = Instrument(screen, 400, 400)
+    instrument = Instrument(screen, 400, 400)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-            # 
+            
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 print("somewhere")
-                if play_button.rect.collidepoint(event.pos):
-                    play_button.toggle()
+                if instrument.rect.collidepoint(event.pos):
+                    instrument.toggle()
                     print("clicked button")
         
-        play_button.draw()
+        instrument.draw()
         
         pygame.display.update()
 
 
 if __name__ == "__main__":
-    play_button()
+    instrument()
