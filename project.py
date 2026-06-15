@@ -38,7 +38,7 @@ def main():
                     my_data.click_at(beat_index, note_index)
 
         
-
+        my_data.update()
         screen.fill((0, 0, 0))
         cell_grid.draw()
         
