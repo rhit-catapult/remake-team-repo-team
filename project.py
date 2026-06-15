@@ -6,6 +6,7 @@ import random
 import time
 import data
 import music_cell
+import image_play_button
 
 
 def main():
@@ -19,6 +20,7 @@ def main():
     mouse_pos = mouse_position.MousePosition(screen)
     my_data = data.Data(8, 16)
     cell_grid = music_cell.Cell(screen, my_data)
+    play_button = image_play_button.Button(screen, 400, 400)
    
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -27,6 +29,14 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if play_button.rect.collidepoint(event.pos):
+                    play_button.toggle()
+                    if play_button.pressed:
+                        my_data.play()
+                    else:
+                        my_data.stop()
 
             if event.type == pygame.KEYDOWN:
                 pressed_keys = pygame.key.get_pressed()
@@ -42,7 +52,7 @@ def main():
         screen.fill((0, 0, 0))
         cell_grid.draw()
         
-        # button.draw()
+        play_button.draw()
 
        
         pygame.display.update()
