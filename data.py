@@ -9,6 +9,7 @@ class Data:
         self.number_of_beats = number_of_beats
         self.music_player = music_player.MusicPlayer()
         all_notes = []
+        self.beat_duration = 0.5  # Duration of each beat in seconds
 
         for beat in range(number_of_beats):
             one_beat = []
@@ -53,22 +54,27 @@ class Data:
             
             self.music_player.play_sound(self.notes[self.current_beat])
             self.current_beat = (self.current_beat + 1) % self.number_of_beats
-            self.next_beat_time = current_time + 1.5  # Adjust the beat duration as needed
+            self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
     def stop(self):
         self.is_playing = False
+
+    def set_bpm(self, bpm):
+        self.beat_duration = 60 / bpm  # Convert BPM to seconds per beat
 
 if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((800, 500))
     data = Data(8, 16)
+    data.music_player.set_instrument("piano")
+    data.set_bpm(320)
     data.click_at(0, 0)
-    data.click_at(0, 3)        
-    data.click_at(0, 1)
-    data.click_at(0, 2)
-    data.click_at(0, 4)
-    data.click_at(0, 0)
-    data.click_at(0, 2)
+    data.click_at(1, 3)        
+    data.click_at(2, 5)
+    data.click_at(3, 3)
+    data.click_at(4, 0)
+    data.click_at(5, 2)
+    data.click_at(6, 0)
     # data.click_at(0, 0)
     data.play()
 
