@@ -35,10 +35,11 @@ class MusicPlayer:
         self.piano_sounds.append(pygame.mixer.Sound("piano/piano_b3.wav"))
         self.piano_sounds.append(pygame.mixer.Sound("piano/piano_c4.wav"))
     
-    def play_sound(self, note_indices):
-        for index in note_indices:
-            if 0 <= index < len(self.current_sounds):
-                self.current_sounds[index].play()
+    def play_sound(self, possible_notes):
+        for k in range(len(possible_notes)):
+            if possible_notes[k]:
+                self.current_sounds[k].play()
+                print("note")
 
     def set_instrument(self, instrument):
         if instrument == "violin":
