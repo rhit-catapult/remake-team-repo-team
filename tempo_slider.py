@@ -26,13 +26,13 @@ class Slider:
         
     def draw(self):
         # pulse factor oscillates between 0 and 1
-        pulse_period = 4500.0  # milliseconds for a full purple->blue->purple cycle
+        pulse_period = 3.5 * 1000 # milliseconds for a full purple->blue->purple cycle
         t = pygame.time.get_ticks() % pulse_period
         f = (math.sin(2 * math.pi * (t / pulse_period)) + 1) / 2
 
         # darker purple and blue RGB
-        purple = (72, 0, 114)
-        blue = (0, 60, 140)
+        purple = (75, 0, 110)
+        blue = (150, 0, 150)
         r = int(purple[0] * (1 - f) + blue[0] * f)
         g = int(purple[1] * (1 - f) + blue[1] * f)
         b = int(purple[2] * (1 - f) + blue[2] * f)
