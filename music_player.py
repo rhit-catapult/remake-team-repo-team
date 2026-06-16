@@ -12,6 +12,7 @@ class MusicPlayer:
         self.piano_sounds = []
         self.drum_sounds = []
         self.current_sounds = self.violin_sounds
+        self.volume = 1.0
         self.violin_sounds.append(pygame.mixer.Sound("violin/violin_c5.wav"))
         self.violin_sounds.append(pygame.mixer.Sound("violin/violin_b4.wav"))
         self.violin_sounds.append(pygame.mixer.Sound("violin/violin_a4.wav"))
@@ -43,11 +44,16 @@ class MusicPlayer:
     def play_sound(self, possible_notes, possible_drums):
         for k in range(len(possible_notes)):
             note_to_play = possible_notes[k]
+            self.current_sounds[note_to_play].set_volume(self.volume)
             self.current_sounds[note_to_play].play()
             
         for k in range(len(possible_drums)):
             drum_to_play = possible_drums[k]
-            self.drum_sounds[drum_to_play].play()    
+            self.drum_sounds[drum_to_play].set_volume(self.volume)
+            self.drum_sounds[drum_to_play].play()
+
+    def set_volume(self, volume):
+        self.volume = max(0.0, min(1.0, float(volume)))
 
     def set_instrument(self, instrument):
         self.current_instrument = instrument

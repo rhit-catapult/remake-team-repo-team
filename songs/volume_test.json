@@ -26,62 +26,12 @@
             false,
             false,
             false,
-            true,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            true,
             false,
             false,
             false
         ],
         [
             false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        [
-            true,
             false,
             false,
             false,
@@ -92,7 +42,7 @@
         ],
         [
             false,
-            true,
+            false,
             false,
             false,
             false,
@@ -103,7 +53,7 @@
         [
             false,
             false,
-            true,
+            false,
             false,
             false,
             false,
@@ -125,6 +75,36 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            true,
             true,
             false,
             false,
@@ -137,16 +117,6 @@
             false,
             false,
             true,
-            false,
-            false
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
             true,
             false
         ],
@@ -158,75 +128,105 @@
             false,
             false,
             false,
-            true
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
         ]
     ],
     "drums": [
         [
             false,
-            true
+            false
         ],
         [
             false,
-            true
-        ],
-        [
-            true,
-            true
-        ],
-        [
-            true,
-            true
-        ],
-        [
-            true,
-            true
-        ],
-        [
-            true,
             false
-        ],
-        [
-            true,
-            false
-        ],
-        [
-            true,
-            false
-        ],
-        [
-            true,
-            false
-        ],
-        [
-            true,
-            false
-        ],
-        [
-            true,
-            false
-        ],
-        [
-            true,
-            true
-        ],
-        [
-            true,
-            true
-        ],
-        [
-            true,
-            true
         ],
         [
             false,
-            true
+            false
         ],
         [
             false,
-            true
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
+        ],
+        [
+            false,
+            false
         ]
     ],
-    "tempo": 306.0,
-    "instrument": "sax"
+    "tempo": 340.0,
+    "instrument": "violin"
 }

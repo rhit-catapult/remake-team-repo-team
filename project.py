@@ -17,6 +17,7 @@ import load_save_dialog
 import load_button
 import save_button 
 from music_bar import Bar
+import volume
 
 
 def main():
@@ -33,7 +34,8 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
-    slider = tempo_slider.Slider(screen, 400, 100, 340, initial_value=220)
+    tempo_bar = tempo_slider.Slider(screen, 400, 100, 340, initial_value = 220)
+    volume_slider = volume.VolumeSlider(screen, 300, 0, 100, initial_value = 50)
     dancer1 = Dancer(screen, 260, 615, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
@@ -68,19 +70,12 @@ def main():
                     dialog.open_save()
                     is_showing_dialog = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_l:
-                    dialog.open_load()
-                    is_showing_dialog = True
-                elif event.key == pygame.K_s:
-                    dialog.open_save()
-                    is_showing_dialog = True
             result = dialog.process_event(event)
             if result and result[0] == 'picked':
                 print('Chosen file:', result[1])
                 is_showing_dialog = False
                 my_data.load_from_file(result[1])
-                slider.value = my_data.get_bpm()
+                tempo_bar.value = my_data.get_bpm()
                 instrument.set_instrument(my_data.music_player.current_instrument)
 
             if result and result[0] == 'saved':
@@ -93,6 +88,14 @@ def main():
             if is_showing_dialog:
                 continue  # skip the rest of the loop to avoid processing other events while the dialog is open
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_l:
+                    dialog.open_load()
+                    is_showing_dialog = True
+                elif event.key == pygame.K_s:
+                    dialog.open_save()
+                    is_showing_dialog = True
+                    
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if play_button.rect.collidepoint(event.pos):
                     play_button.toggle()
@@ -135,12 +138,14 @@ def main():
             continue  # skip the rest of the loop to avoid updating other elements while the splash screen is showing
         
 
-        slider.update()
-        dancer1.update(play_button.pressed, slider.get_bpm())
-        dancer2.update(play_button.pressed, slider.get_bpm())
+        tempo_bar.update()
+        volume_slider.update()
+        dancer1.update(play_button.pressed, tempo_bar.get_bpm())
+        dancer2.update(play_button.pressed, tempo_bar.get_bpm())
 
-        my_data.set_bpm(slider.get_bpm())
+        my_data.set_bpm(tempo_bar.get_bpm())
         my_data.update()
+        my_data.music_player.set_volume(volume_slider.get_volume() / 100.0)
         
         screen.fill((0, 0, 0))
         cell_grid.draw()
@@ -149,7 +154,7 @@ def main():
         play_button.draw()
         instrument.draw()
         clear_button.draw()
-        slider.draw()
+        tempo_bar.draw()
         dancer1.draw()
         dancer2.draw()
         if need_beat_bar == True:
@@ -157,9 +162,9 @@ def main():
         
         load.draw()
         save.draw()
+        volume_slider.draw()
 
-        dialog.draw()
-       
+        dialog.draw()       
         pygame.display.update()
 
 
