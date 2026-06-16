@@ -18,6 +18,9 @@ class Instrument:
         self.rect = self.instrument_violin.get_rect(center=(self.x - 265, self.y + 243))
         self.possible_instruments = ["violin", "sax", "piano"]
         self.current_instrument = 0
+    
+    def get_instrument(self):
+        return self.possible_instruments[self.current_instrument]
 
     def draw(self):
         

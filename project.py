@@ -46,7 +46,7 @@ def main():
                 print("somewhere")
                 if instrument.rect.collidepoint(event.pos):
                     instrument.toggle()
-                    print("clicked button")
+                    my_data.music_player.set_instrument(instrument.get_instrument())
 
             if event.type == pygame.KEYDOWN:
                 pressed_keys = pygame.key.get_pressed()
