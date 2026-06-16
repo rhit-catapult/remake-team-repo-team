@@ -1,0 +1,6 @@
+{
+    "notes": [[false, false, false, false, false, false, false, true], [false, false, false, false, false, false, true, false], [false, false, false, false, false, true, false, false], [false, false, false, false, true, false, false, false], [false, false, false, true, false, false, false, false], [false, false, true, false, false, false, false, false], [false, true, false, false, false, false, false, false], [true, false, false, false, false, false, false, false], [false, true, false, false, false, false, false, false], [false, false, true, false, false, false, false, false], [false, false, false, true, false, false, false, false], [false, false, false, false, true, false, false, false], [false, false, false, false, false, true, false, false], [false, false, false, false, false, false, true, false], [false, false, false, false, false, false, false, true], [false, false, false, false, false, false, false, false]],
+    "drums": [[false, false], [false, false], [false, false], [false, false], [false, false], [false, false], [false, false], [false, true], [false, false], [false, false], [false, false], [false, false], [false, false], [false, false], [false, false], [true, true]],
+    "tempo": 120,
+    "instrument": "piano"
+}

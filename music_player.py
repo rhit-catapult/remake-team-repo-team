@@ -6,6 +6,7 @@ import math
 
 class MusicPlayer:
     def __init__(self):
+        self.current_instrument = "violin"
         self.violin_sounds = []
         self.sax_sounds = []
         self.piano_sounds = []
@@ -49,6 +50,7 @@ class MusicPlayer:
             self.drum_sounds[drum_to_play].play()    
 
     def set_instrument(self, instrument):
+        self.current_instrument = instrument
         if instrument == "violin":
             self.current_sounds = self.violin_sounds
         elif instrument == "sax":

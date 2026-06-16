@@ -13,6 +13,9 @@ import tempo_slider
 import image_clear_button
 from dancer import Dancer
 import splash_screen
+import load_save_dialog
+import load_button
+import save_button 
 from music_bar import Bar
 
 
@@ -34,11 +37,15 @@ def main():
     dancer1 = Dancer(screen, 260, 615, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
+    load = load_button.LoadButton(screen, 400, 400)
+    save = save_button.SaveButton(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
     beat_bar = Bar(screen)
     need_beat_bar = False
 
+    dialog = load_save_dialog.LoadSaveDialog(screen)
+    is_showing_dialog = False
    
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -53,6 +60,39 @@ def main():
                 is_showing_splashhscreen = False
                 continue  # skip the rest of the loop to avoid processing other events while the splash screen is showing
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if load.rect.collidepoint(event.pos):
+                    dialog.open_load()
+                    is_showing_dialog = True
+                if save.rect.collidepoint(event.pos):
+                    dialog.open_save()
+                    is_showing_dialog = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_l:
+                    dialog.open_load()
+                    is_showing_dialog = True
+                elif event.key == pygame.K_s:
+                    dialog.open_save()
+                    is_showing_dialog = True
+            result = dialog.process_event(event)
+            if result and result[0] == 'picked':
+                print('Chosen file:', result[1])
+                is_showing_dialog = False
+                my_data.load_from_file(result[1])
+                slider.value = my_data.get_bpm()
+                instrument.set_instrument(my_data.music_player.current_instrument)
+
+            if result and result[0] == 'saved':
+                print('Save filename:', result[1])
+                is_showing_dialog = False
+                my_data.save_to_file(result[1], instrument.get_instrument())
+            if result and result[0] == 'closed':
+                is_showing_dialog = False
+
+            if is_showing_dialog:
+                continue  # skip the rest of the loop to avoid processing other events while the dialog is open
+
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if play_button.rect.collidepoint(event.pos):
                     play_button.toggle()
@@ -62,6 +102,8 @@ def main():
                     else:
                         my_data.stop()
                         need_beat_bar = False
+
+
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if instrument.rect.collidepoint(event.pos):
@@ -113,6 +155,10 @@ def main():
         if need_beat_bar == True:
             beat_bar.draw(my_data.get_current_beat() - 1)
         
+        load.draw()
+        save.draw()
+
+        dialog.draw()
        
         pygame.display.update()
 
