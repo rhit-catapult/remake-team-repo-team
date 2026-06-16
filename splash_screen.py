@@ -10,22 +10,34 @@ class SplashScreen:
         self.x = 0
         self.y = 0
         self.splash_image = pygame.transform.scale(self.splash_image, (1300, 680))
+        self.pressed = False
+        
 
     def draw(self):
         self.screen.blit(self.splash_image, (self.x, self.y))
 
-    # click anywhere on the screen to close it? use a toggle?
+    def toggle(self):
+        self.pressed = not self.pressed
+            
+        
+
 
 
 def splash():
     screen = pygame.display.set_mode((1300, 680))
     splash = SplashScreen(screen)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
         
-        # toggle?
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                splash.toggle()
+
+        if splash.pressed:
+            return
+
 
         splash.draw()
         
