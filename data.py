@@ -9,6 +9,7 @@ class Data:
         self.number_of_beats = number_of_beats
         self.music_player = music_player.MusicPlayer()
         all_notes = []
+        all_drums = []
         self.beat_duration = 0.5  # Duration of each beat in seconds
 
         for beat in range(number_of_beats):
@@ -17,6 +18,14 @@ class Data:
                 one_beat.append(False)
             all_notes.append(one_beat)
         self.notes = all_notes
+
+        for beat in range(number_of_beats):
+            one_beat = []
+            for note in range(2):
+                one_beat.append(False)
+            all_drums.append(one_beat)
+        self.drums = all_drums
+
         self.is_playing = False
 
 
@@ -25,10 +34,15 @@ class Data:
         for beat in self.notes:
             representation += "\n" + str(beat)
         return representation
+        # consider: printing the drum info
     
     def click_at(self, beat_index, note_index):
         if 0 <= beat_index < self.number_of_beats and 0 <= note_index < self.number_of_notes:
             self.notes[beat_index][note_index] = not self.notes[beat_index][note_index]
+
+    def click_drum_at(self, beat_index, note_index):
+        if 0 <= beat_index < self.number_of_beats and 0 <= note_index < 2:
+            self.drums[beat_index][note_index] = not self.drums[beat_index][note_index]
 
     def get_note(self, beat_index, note_index):
         if 0 <= beat_index < self.number_of_beats and 0 <= note_index < self.number_of_notes:
@@ -39,6 +53,9 @@ class Data:
     def get_all_notes(self):
         return self.notes
     
+    def get_all_drums(self):
+        return self.drums
+
     def play(self):
         self.is_playing = True
         self.next_beat_time = time.time()
@@ -77,6 +94,11 @@ if __name__ == "__main__":
     data.click_at(6, 0)
     # data.click_at(0, 0)
     data.play()
+
+    data.click_drum_at(0, 0)
+    data.click_drum_at(1, 1)
+    data.click_drum_at(15, 1)
+    print(data.get_all_drums())
 
     while True:
         for event in pygame.event.get():
