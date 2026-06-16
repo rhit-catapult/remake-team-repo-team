@@ -7,13 +7,13 @@ from pygame_gui.elements import UIButton, UILabel, UITextEntryLine, UIWindow
 
 
 class LoadSaveDialog:
-    """Encapsulates load/save buttons and a `UIFileDialog` for reuse in apps.
+    """Encapsulates load/save UI dialogs and exposes public launch methods.
 
     Usage patterns:
     - Create with an existing `pygame.Surface` screen. Optionally pass an
       existing `pygame_gui.UIManager` to share a manager across your app.
-    - Call `process_event(event)` for each pygame event, `update(dt)` each
-      frame, and `draw()` to render the UI.
+    - Call `process_event(event)` for each pygame event and `draw()` to render
+      the UI.
     - Check `last_chosen_path` after a `UI_FILE_DIALOG_PATH_PICKED` result.
     """
 
@@ -23,12 +23,11 @@ class LoadSaveDialog:
         self.ui_manager = ui_manager or pygame_gui.UIManager(self.size)
         self._own_manager = ui_manager is None
 
-        self.load_btn = UIButton(relative_rect=pygame.Rect(10, 10, 120, 30),
-                                text='Load', manager=self.ui_manager)
-        self.save_btn = UIButton(relative_rect=pygame.Rect(140, 10, 120, 30),
-                                text='Save', manager=self.ui_manager)
-
         self.file_dialog = None
+        self.save_window = None
+        self.save_entry = None
+        self.save_confirm_btn = None
+        self.save_cancel_btn = None
         self.last_chosen_path = None
 
     def open_load(self):
@@ -39,11 +38,10 @@ class LoadSaveDialog:
                                             initial_file_path='songs',
                                             allow_existing_files_only=True,
                                             allow_picking_directories=False)
-            self.load_btn.disable()
 
     def open_save(self):
         # Open a custom "Save As" window so the user can type a filename
-        if self.file_dialog is None and getattr(self, 'save_window', None) is None:
+        if self.file_dialog is None and self.save_window is None:
             self.save_window = UIWindow(pygame.Rect(220, 180, 360, 140),
                                         self.ui_manager,
                                         window_display_title='Save As')
@@ -60,15 +58,10 @@ class LoadSaveDialog:
             self.save_cancel_btn = UIButton(relative_rect=pygame.Rect(200, 78, 100, 30),
                                             text='Cancel', manager=self.ui_manager,
                                             container=self.save_window)
-            self.save_btn.disable()
 
     def process_event(self, event):
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == self.load_btn:
-                self.open_load()
-            elif event.ui_element == self.save_btn:
-                self.open_save()
-            elif getattr(self, 'save_confirm_btn', None) is not None and event.ui_element == self.save_confirm_btn:
+            if getattr(self, 'save_confirm_btn', None) is not None and event.ui_element == self.save_confirm_btn:
                 name = self.save_entry.get_text().strip()
                 if name == '':
                     return None
@@ -85,7 +78,6 @@ class LoadSaveDialog:
                 self.save_entry = None
                 self.save_confirm_btn = None
                 self.save_cancel_btn = None
-                self.save_btn.enable()
                 return ('picked', self.last_chosen_path)
             elif getattr(self, 'save_cancel_btn', None) is not None and event.ui_element == self.save_cancel_btn:
                 try:
@@ -96,7 +88,6 @@ class LoadSaveDialog:
                 self.save_entry = None
                 self.save_confirm_btn = None
                 self.save_cancel_btn = None
-                self.save_btn.enable()
                 return ('closed', None)
 
         if event.type == pygame_gui.UI_FILE_DIALOG_PATH_PICKED and event.ui_element == self.file_dialog:
@@ -104,13 +95,18 @@ class LoadSaveDialog:
             # Caller can inspect `last_chosen_path` after this return value
             self.file_dialog.kill()
             self.file_dialog = None
-            self.load_btn.enable(); self.save_btn.enable()
             return ('picked', self.last_chosen_path)
 
-        if event.type == pygame_gui.UI_WINDOW_CLOSE and event.ui_element == self.file_dialog:
-            self.file_dialog = None
-            self.load_btn.enable(); self.save_btn.enable()
-            return ('closed', None)
+        if event.type == pygame_gui.UI_WINDOW_CLOSE:
+            if event.ui_element == self.file_dialog:
+                self.file_dialog = None
+                return ('closed', None)
+            if getattr(self, 'save_window', None) is not None and event.ui_element == self.save_window:
+                self.save_window = None
+                self.save_entry = None
+                self.save_confirm_btn = None
+                self.save_cancel_btn = None
+                return ('closed', None)
 
         self.ui_manager.process_events(event)
         return None
@@ -122,8 +118,7 @@ class LoadSaveDialog:
 
 def main():
     pygame.init()
-    size = (800, 600)
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption('Load/Save Dialog Example')
 
     dialog = LoadSaveDialog(screen)
@@ -131,11 +126,15 @@ def main():
     clock = pygame.time.Clock()
 
     while True:
-        clock.tick(60)  # this sets the framerate of your game
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_l:
+                    dialog.open_load()
+                elif event.key == pygame.K_s:
+                    dialog.open_save()
             result = dialog.process_event(event)
             if result and result[0] == 'picked':
                 print('Chosen path:', result[1])
