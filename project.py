@@ -13,6 +13,7 @@ import tempo_slider
 import image_clear_button
 from dancer import Dancer
 import splash_screen
+from music_bar import Bar
 
 
 def main():
@@ -35,6 +36,8 @@ def main():
     clear_button = image_clear_button.Clear(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
+    beat_bar = Bar(screen)
+    need_beat_bar = False
 
    
     # let's set the framerate
@@ -55,8 +58,10 @@ def main():
                     play_button.toggle()
                     if play_button.pressed:
                         my_data.play()
+                        need_beat_bar = True
                     else:
                         my_data.stop()
+                        need_beat_bar = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if instrument.rect.collidepoint(event.pos):
@@ -86,6 +91,7 @@ def main():
             splash.draw()
             pygame.display.update()
             continue  # skip the rest of the loop to avoid updating other elements while the splash screen is showing
+        
 
         slider.update()
         dancer1.update(play_button.pressed, slider.get_bpm())
@@ -93,6 +99,7 @@ def main():
 
         my_data.set_bpm(slider.get_bpm())
         my_data.update()
+        
         screen.fill((0, 0, 0))
         cell_grid.draw()
         drums_cells.draw_drums()   
@@ -103,7 +110,9 @@ def main():
         slider.draw()
         dancer1.draw()
         dancer2.draw()
-
+        if need_beat_bar == True:
+            beat_bar.draw(my_data.get_current_beat() - 1)
+        
        
         pygame.display.update()
 

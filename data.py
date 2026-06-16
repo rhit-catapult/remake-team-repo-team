@@ -7,6 +7,7 @@ class Data:
     def __init__(self, number_of_notes, number_of_beats):
         self.number_of_notes = number_of_notes
         self.number_of_beats = number_of_beats
+        self.current_beat = 0
         self.music_player = music_player.MusicPlayer()
         all_notes = []
         all_drums = []
@@ -91,7 +92,7 @@ class Data:
             self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
     def get_current_beat(self):
-        print(self.current_beat)
+        # print(self.current_beat)
         return self.current_beat
     
     def stop(self):
