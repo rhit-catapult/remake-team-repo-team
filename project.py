@@ -57,7 +57,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if clear_button.is_clicked(event.pos):
                     my_data.clear_screen()
-                    play_button = self.base_color
+                    play_button.reset()
 
 
             if event.type == pygame.KEYDOWN:

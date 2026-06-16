@@ -29,6 +29,15 @@ class Button:
         else:
             self.color = self.base_color
         self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
+
+    def reset(self):
+        self.pressed = False
+        # self.color = self.active_colour if self.pressed else self.base_color
+        if self.pressed:
+            self.color = self.active_color
+        else:
+            self.color = self.base_color
+        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
         
 
 

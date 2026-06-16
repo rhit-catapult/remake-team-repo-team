@@ -10,10 +10,13 @@ class Clear:
 
         self.clear_image = pygame.image.load("clear.png")
         self.clear_image = pygame.transform.scale(self.clear_image, (IMAGE_SIZE, IMAGE_SIZE))
-        self.rect = self.clear_image.get_rect(center=(self.x + 800, self.y + 245))
+        self.rect = self.clear_image.get_rect(center=(self.x + 850, self.y + 245))
         
     def draw(self):
         self.screen.blit(self.clear_image, self.rect)
+
+    def is_clicked(self, mouse_pos):
+        return self.rect.collidepoint(mouse_pos)
 
 
 def clear_button():
