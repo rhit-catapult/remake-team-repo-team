@@ -112,6 +112,16 @@ class Data:
             self.set_bpm(data['tempo'])
             self.music_player.set_instrument(data['instrument'])
 
+    def save_to_file(self, file_path, instrument):
+        data = {
+            'notes': self.notes,
+            'drums': self.drums,
+            'tempo': self.get_bpm(),
+            'instrument': instrument
+        }
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4)
+
 if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((800, 500))
