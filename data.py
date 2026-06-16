@@ -31,10 +31,16 @@ class Data:
 
     def __repr__(self):
         representation = f"Data(number_of_notes={self.number_of_notes}, number_of_beats={self.number_of_beats})"
-        for beat in self.notes:
-            representation += "\n" + str(beat)
+        for k in range(len(self.notes)):
+            beat = self.notes[k]
+            drums = self.drums[k]
+            representation += "\n" + str(beat) + "  " + str(drums)
+        
+        
+        
         return representation
-        # consider: printing the drum info
+        
+    
     
     def click_at(self, beat_index, note_index):
         if 0 <= beat_index < self.number_of_beats and 0 <= note_index < self.number_of_notes:
@@ -67,9 +73,19 @@ class Data:
 
         current_time = time.time()
         if current_time >= self.next_beat_time:
+            possible_notes = []
+            for k in range(8):
+                if self.notes[self.current_beat][k]:
+                    possible_notes.append(k)
+
+            possible_drums = []
+            for k in range(2):
+                if self.drums[self.current_beat][k]:
+                    possible_drums.append(k)
+
             print(f"Playing beat {self.current_beat}: {self.notes[self.current_beat]}")
             
-            self.music_player.play_sound(self.notes[self.current_beat])
+            self.music_player.play_sound(possible_notes, possible_drums)
             self.current_beat = (self.current_beat + 1) % self.number_of_beats
             self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
@@ -85,20 +101,21 @@ if __name__ == "__main__":
     data = Data(8, 16)
     data.music_player.set_instrument("piano")
     data.set_bpm(320)
-    data.click_at(0, 0)
-    data.click_at(1, 3)        
-    data.click_at(2, 5)
-    data.click_at(3, 3)
-    data.click_at(4, 0)
-    data.click_at(5, 2)
-    data.click_at(6, 0)
     # data.click_at(0, 0)
-    data.play()
+    # data.click_at(1, 3)        
+    # data.click_at(2, 5)
+    # data.click_at(3, 3)
+    # data.click_at(4, 0)
+    # data.click_at(5, 2)
+    # data.click_at(6, 0)
+    # data.click_at(0, 0)
+    
 
     data.click_drum_at(0, 0)
     data.click_drum_at(1, 1)
     data.click_drum_at(15, 1)
     print(data.get_all_drums())
+    data.play()
 
     while True:
         for event in pygame.event.get():

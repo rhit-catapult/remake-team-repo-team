@@ -9,6 +9,7 @@ class MusicPlayer:
         self.violin_sounds = []
         self.sax_sounds = []
         self.piano_sounds = []
+        self.drum_sounds = []
         self.current_sounds = self.violin_sounds
         self.violin_sounds.append(pygame.mixer.Sound("violin/violin_c5.wav"))
         self.violin_sounds.append(pygame.mixer.Sound("violin/violin_b4.wav"))
@@ -34,12 +35,18 @@ class MusicPlayer:
         self.piano_sounds.append(pygame.mixer.Sound("piano/piano_e3.wav"))
         self.piano_sounds.append(pygame.mixer.Sound("piano/piano_d3.wav"))
         self.piano_sounds.append(pygame.mixer.Sound("piano/piano_c3.wav"))
+        self.drum_sounds.append(pygame.mixer.Sound("drums/drum.wav"))
+        self.drum_sounds.append(pygame.mixer.Sound("drums/hithat.wav"))
+        
     
-    def play_sound(self, possible_notes):
+    def play_sound(self, possible_notes, possible_drums):
         for k in range(len(possible_notes)):
-            if possible_notes[k]:
-                self.current_sounds[k].play()
-                print("note")
+            note_to_play = possible_notes[k]
+            self.current_sounds[note_to_play].play()
+            
+        for k in range(len(possible_drums)):
+            drum_to_play = possible_drums[k]
+            self.drum_sounds[drum_to_play].play()    
 
     def set_instrument(self, instrument):
         if instrument == "violin":
@@ -56,9 +63,11 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((800, 500))
     player = MusicPlayer()
     player.set_instrument("piano")
-    player.play_sound([0, 2, 4])
-    time.sleep(2)
-    player.play_sound([0])
+    # #player.play_sound([0, 2, 4], [0, 1])
+    # #time.sleep(2)
+    # player.play_sound([0], [])
+    # time.sleep(2)
+    player.play_sound([], [0])
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
