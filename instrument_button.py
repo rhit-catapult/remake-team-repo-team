@@ -4,7 +4,7 @@ import sys
 
 class Instrument:
     def __init__(self, screen: pygame.Surface, x, y):
-        IMAGE_SIZE = 70
+        IMAGE_SIZE = 75
         self.screen = screen
         self.x = x
         self.y = y
@@ -15,7 +15,7 @@ class Instrument:
         self.instrument_sax = pygame.transform.scale(self.instrument_sax, (IMAGE_SIZE, IMAGE_SIZE))
         self.instrument_piano = pygame.image.load("piano_button.png")
         self.instrument_piano = pygame.transform.scale(self.instrument_piano, (IMAGE_SIZE, IMAGE_SIZE))
-        self.rect = self.instrument_violin.get_rect(center=(self.x - 265, self.y + 245))
+        self.rect = self.instrument_violin.get_rect(center=(self.x - 265, self.y + 243))
         self.possible_instruments = ["violin", "sax", "piano"]
         self.current_instrument = 0
 
@@ -30,15 +30,15 @@ class Instrument:
 
     def toggle(self):
         if self.current_instrument == 0:
-            self.rect = self.instrument_sax.get_rect(center=(self.x - 265, self.y + 245))
+            self.rect = self.instrument_sax.get_rect(center=(self.x - 265, self.y + 243))
             self.current_instrument = 1
 
         elif self.current_instrument == 1:
-            self.rect = self.instrument_piano.get_rect(center=(self.x - 265, self.y + 245))
+            self.rect = self.instrument_piano.get_rect(center=(self.x - 265, self.y + 243))
             self.current_instrument = 2
 
         elif self.current_instrument == 2:
-            self.rect = self.instrument_violin.get_rect(center=(self.x -265, self.y + 245))
+            self.rect = self.instrument_violin.get_rect(center=(self.x -265, self.y + 243))
             self.current_instrument = 0
         
         print("self.current_instrument", self.current_instrument)
