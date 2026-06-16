@@ -3,11 +3,9 @@ import sys
 
 
 class Instrument:
-    def __init__(self, screen: pygame.Surface, x, y):
+    def __init__(self, screen: pygame.Surface):
         IMAGE_SIZE = 75
         self.screen = screen
-        self.x = x
-        self.y = y
        
         self.instrument_violin = pygame.image.load("violin_button.png")
         self.instrument_violin = pygame.transform.scale(self.instrument_violin, (IMAGE_SIZE, IMAGE_SIZE))
@@ -15,7 +13,7 @@ class Instrument:
         self.instrument_sax = pygame.transform.scale(self.instrument_sax, (IMAGE_SIZE, IMAGE_SIZE))
         self.instrument_piano = pygame.image.load("piano_button.png")
         self.instrument_piano = pygame.transform.scale(self.instrument_piano, (IMAGE_SIZE, IMAGE_SIZE))
-        self.rect = self.instrument_violin.get_rect(center=(self.x - 265, self.y + 243))
+        self.rect = self.instrument_violin.get_rect(center=(135, 643))
         self.possible_instruments = ["violin", "sax", "piano"]
         self.current_instrument = 0
     
@@ -37,15 +35,15 @@ class Instrument:
 
     def toggle(self):
         if self.current_instrument == 0:
-            self.rect = self.instrument_sax.get_rect(center=(self.x - 265, self.y + 243))
+            self.rect = self.instrument_sax.get_rect(center=(135, 643))
             self.current_instrument = 1
 
         elif self.current_instrument == 1:
-            self.rect = self.instrument_piano.get_rect(center=(self.x - 265, self.y + 243))
+            self.rect = self.instrument_piano.get_rect(center=(135, 643))
             self.current_instrument = 2
 
         elif self.current_instrument == 2:
-            self.rect = self.instrument_violin.get_rect(center=(self.x -265, self.y + 243))
+            self.rect = self.instrument_violin.get_rect(center=(135, 643))
             self.current_instrument = 0
         
         print("self.current_instrument", self.current_instrument)
@@ -54,7 +52,7 @@ class Instrument:
 
 def instrument():
     screen = pygame.display.set_mode((1300, 680))
-    instrument = Instrument(screen, 400, 400)
+    instrument = Instrument(screen)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
