@@ -92,8 +92,8 @@ class Data:
             self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
     def get_current_beat(self):
-        # print(self.current_beat)
-        return self.current_beat
+        print(self.current_beat)
+        return self.current_beat + 1
     
     def stop(self):
         self.is_playing = False

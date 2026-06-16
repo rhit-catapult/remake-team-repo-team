@@ -8,16 +8,17 @@ from play_button import play_button
 class Bar:
     def __init__(self, screen):
         self.screen = screen
-        self.x = 0
-        self.y = 0
         self.width = 81.25
         self.height = 605 
 
-    def draw(self, what_beat):
-        what_beat = what_beat * (1300 // 16)
+    def draw(self, current_beat):
+        if current_beat == 0:
+            current_beat = 0
+        else:
+            current_beat = (self.width * current_beat) - self.width
         surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
         surface.fill((0, 100, 255, 30))
-        self.screen.blit(surface, (self.x + what_beat, self.y))
+        self.screen.blit(surface, (current_beat, 0))
         
 
 def main():
@@ -26,6 +27,7 @@ def main():
     screen = pygame.display.set_mode((1300, 680))
     bar = Bar(screen)
     clock = pygame.time.Clock()
+    my_data = Data(8, 16)
 
     while True:
         clock.tick(60)
@@ -35,7 +37,7 @@ def main():
 
         screen.fill(pygame.Color("White"))
         
-        bar.draw(2)
+        bar.draw(my_data.get_current_beat())
     
         pygame.display.update()
 if __name__ == "__main__":
