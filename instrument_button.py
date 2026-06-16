@@ -21,6 +21,10 @@ class Instrument:
     
     def get_instrument(self):
         return self.possible_instruments[self.current_instrument]
+    
+    def set_instrument(self, instrument_string):
+        if instrument_string in self.possible_instruments:
+            self.current_instrument = self.possible_instruments.index(instrument_string)
 
     def draw(self):
         

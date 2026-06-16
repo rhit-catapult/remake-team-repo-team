@@ -46,7 +46,7 @@ class LoadSaveDialog:
                                         self.ui_manager,
                                         window_display_title='Save As')
             UILabel(relative_rect=pygame.Rect(10, 10, 340, 20),
-                    text='Enter filename (will be saved in songs/):',
+                    text='Enter filename:',
                     manager=self.ui_manager,
                     container=self.save_window)
             self.save_entry = UITextEntryLine(relative_rect=pygame.Rect(10, 36, 340, 30),

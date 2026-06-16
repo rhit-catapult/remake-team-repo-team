@@ -14,7 +14,8 @@ import image_clear_button
 from dancer import Dancer
 import splash_screen
 import load_save_dialog
-
+import load_button
+import save_button
 
 def main():
     pygame.init()
@@ -34,6 +35,8 @@ def main():
     dancer1 = Dancer(screen, 260, 615, image_set= "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
+    load = load_button.LoadButton(screen, 400, 400)
+    save = save_button.SaveButton(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
 
@@ -53,6 +56,14 @@ def main():
                 is_showing_splashhscreen = False
                 continue  # skip the rest of the loop to avoid processing other events while the splash screen is showing
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if load.rect.collidepoint(event.pos):
+                    dialog.open_load()
+                    is_showing_dialog = True
+                if save.rect.collidepoint(event.pos):
+                    dialog.open_save()
+                    is_showing_dialog = True
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_l:
                     dialog.open_load()
@@ -65,6 +76,9 @@ def main():
                 print('Chosen file:', result[1])
                 is_showing_dialog = False
                 my_data.load_from_file(result[1])
+                slider.value = my_data.get_bpm()
+                instrument.set_instrument(my_data.music_player.current_instrument)
+
             if result and result[0] == 'saved':
                 print('Save filename:', result[1])
                 is_showing_dialog = False
@@ -130,6 +144,8 @@ def main():
         slider.draw()
         dancer1.draw()
         dancer2.draw()
+        load.draw()
+        save.draw()
 
         dialog.draw()
        
