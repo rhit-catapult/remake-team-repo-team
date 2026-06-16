@@ -15,7 +15,9 @@ from dancer import Dancer
 import splash_screen
 import load_save_dialog
 import load_button
-import save_button
+import save_button 
+from music_bar import Bar
+
 
 def main():
     pygame.init()
@@ -31,14 +33,16 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
-    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value=240)
-    dancer1 = Dancer(screen, 260, 615, image_set= "set1")
+    slider = tempo_slider.Slider(screen, 400, 100, 340, initial_value=220)
+    dancer1 = Dancer(screen, 260, 615, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
     load = load_button.LoadButton(screen, 400, 400)
     save = save_button.SaveButton(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
+    beat_bar = Bar(screen)
+    need_beat_bar = False
 
     dialog = load_save_dialog.LoadSaveDialog(screen)
     is_showing_dialog = False
@@ -94,8 +98,10 @@ def main():
                     play_button.toggle()
                     if play_button.pressed:
                         my_data.play()
+                        need_beat_bar = True
                     else:
                         my_data.stop()
+                        need_beat_bar = False
 
 
 
@@ -127,6 +133,7 @@ def main():
             splash.draw()
             pygame.display.update()
             continue  # skip the rest of the loop to avoid updating other elements while the splash screen is showing
+        
 
         slider.update()
         dancer1.update(play_button.pressed, slider.get_bpm())
@@ -134,6 +141,7 @@ def main():
 
         my_data.set_bpm(slider.get_bpm())
         my_data.update()
+        
         screen.fill((0, 0, 0))
         cell_grid.draw()
         drums_cells.draw_drums()   
@@ -144,6 +152,9 @@ def main():
         slider.draw()
         dancer1.draw()
         dancer2.draw()
+        if need_beat_bar == True:
+            beat_bar.draw(my_data.get_current_beat() - 1)
+        
         load.draw()
         save.draw()
 
