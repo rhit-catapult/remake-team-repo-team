@@ -67,8 +67,4 @@ if __name__ == "__main__":
         dancer.draw()
 
         pygame.display.update()
-        clock.tick(30)
-
-    if __name__ == "__main__":
-        pygame.init()
-        screen = pygame.display.set_mode((800, 500))
+        clock.tick(2)
