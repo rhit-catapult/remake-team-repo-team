@@ -14,11 +14,11 @@ class VolumeSlider:
         self.max_value = max_value
         self.track_width = track_width
         self.height = 10
-        self.y = screen.get_height() - self.height - 56
+        self.y = screen.get_height() - self.height - 48
         self.value = initial_value if initial_value is not None else min_value
         self.width = self.value_to_width(self.value)
         self.dragging = False
-        self.font = pygame.font.SysFont("jokerman", 18)
+        self.font = pygame.font.SysFont("jokerman", 23)
         self.spacing = 10
         self.pulse_period = 4000.0
         self.label = "Volume"
