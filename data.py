@@ -78,7 +78,7 @@ class Data:
                 if self.drums[self.current_beat][k]:
                     possible_drums.append(k)
 
-            print(f"Playing beat {self.current_beat}: {self.notes[self.current_beat]}")
+            # print(f"Playing beat {self.current_beat}: {self.notes[self.current_beat]}")
             
             self.music_player.play_sound(possible_notes, possible_drums)
             self.current_beat = (self.current_beat + 1) % self.number_of_beats

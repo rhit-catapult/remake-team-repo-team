@@ -3,11 +3,9 @@ import sys
 
 
 class Button:
-    def __init__(self, screen: pygame.Surface, x, y):
+    def __init__(self, screen: pygame.Surface):
         IMAGE_SIZE = 70
         self.screen = screen
-        self.x = x
-        self.y = y
         self.color = pygame.image.load("play.png")
         self.color = pygame.transform.scale(self.color, (IMAGE_SIZE, IMAGE_SIZE))
         self.base_color = pygame.image.load("play.png")
@@ -15,7 +13,7 @@ class Button:
         self.active_color = pygame.image.load("pause.png")
         self.active_color = pygame.transform.scale(self.active_color, (IMAGE_SIZE, IMAGE_SIZE))
         self.pressed = False
-        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
+        self.rect = self.color.get_rect(center=(50, 645))
 
     def draw(self):
         self.screen.blit(self.color, self.rect)
@@ -28,7 +26,7 @@ class Button:
             self.color = self.active_color
         else:
             self.color = self.base_color
-        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
+        self.rect = self.color.get_rect(center=(50, 645))
 
     def reset(self):
         self.pressed = False
@@ -37,14 +35,14 @@ class Button:
             self.color = self.active_color
         else:
             self.color = self.base_color
-        self.rect = self.color.get_rect(center=(self.x - 350, self.y + 245))
+        self.rect = self.color.get_rect(center=(50, 645))
         
 
 
 
 def play_button():
     screen = pygame.display.set_mode((1300, 680))
-    play_button = Button(screen, 400, 400)
+    play_button = Button(screen)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

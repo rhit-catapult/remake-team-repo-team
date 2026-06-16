@@ -2,15 +2,13 @@ import pygame
 import sys
 
 class LoadButton:
-    def __init__(self, screen: pygame.Surface, x, y):
+    def __init__(self, screen: pygame.Surface):
         IMAGE_SIZE = 70
         self.screen = screen
-        self.x = x
-        self.y = y
 
         self.load_image = pygame.image.load("load.png")
         self.load_image = pygame.transform.scale(self.load_image, (IMAGE_SIZE, IMAGE_SIZE))
-        self.rect = self.load_image.get_rect(center=(self.x + 700, self.y + 245))
+        self.rect = self.load_image.get_rect(center=(1100, 645))
         
     def draw(self):
         self.screen.blit(self.load_image, self.rect)
@@ -21,7 +19,7 @@ class LoadButton:
 
 def load_button():
     screen = pygame.display.set_mode((1300, 680))
-    load_button = LoadButton(screen, 400, 400)
+    load_button = LoadButton(screen)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
