@@ -10,7 +10,7 @@ class Cell:
         self.data = data
           
     def draw(self):
-        color = [pygame.Color("Maroon"), pygame.Color("Orange"), pygame.Color("Yellow"), pygame.Color(" Dark Green"), pygame.Color("Teal"), pygame.Color("Blue"), pygame.Color("Purple")]
+        color = [pygame.Color("Maroon"), pygame.Color("Orange"), pygame.Color("Yellow"), pygame.Color("Dark Green"), pygame.Color("Teal"), pygame.Color("Blue"), pygame.Color("Purple")]
         next_color = 0
         self.x = 0
         self.y = 1
@@ -18,7 +18,6 @@ class Cell:
         spacing_horizontal = 20
         self.height = 60
         spacing_vertical = 20
-
         notes = self.data.get_all_notes()
        
         for note_index in range(8):
