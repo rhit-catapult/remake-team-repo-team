@@ -12,6 +12,7 @@ import instrument_button
 import tempo_slider
 import image_clear_button
 from dancer import Dancer
+import splash_screen
 
 
 def main():
@@ -31,15 +32,22 @@ def main():
     slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value=240)
     dancer = Dancer(screen)
     clear_button = image_clear_button.Clear(screen, 400, 400)
+    splash = splash_screen.SplashScreen(screen)
+    is_showing_splashhscreen = True
 
    
     # let's set the framerate
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)  # this sets the framerate of your game
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            
+            if is_showing_splashhscreen and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                is_showing_splashhscreen = False
+                continue  # skip the rest of the loop to avoid processing other events while the splash screen is showing
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if play_button.rect.collidepoint(event.pos):
@@ -73,7 +81,11 @@ def main():
                     else:
                         my_data.click_at(beat_index, note_index)
 
-        
+        if is_showing_splashhscreen:
+            splash.draw()
+            pygame.display.update()
+            continue  # skip the rest of the loop to avoid updating other elements while the splash screen is showing
+
         slider.update()
         dancer.update(play_button.pressed)
         my_data.set_bpm(slider.get_bpm())
