@@ -11,6 +11,7 @@ import music_player
 import instrument_button
 import tempo_slider
 import image_clear_button
+from dancer import Dancer
 
 
 def main():
@@ -27,7 +28,8 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
-    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value= 240)
+    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value=240)
+    dancer = Dancer(screen)
     clear_button = image_clear_button.Clear(screen, 400, 400)
 
    
@@ -73,6 +75,7 @@ def main():
 
         
         slider.update()
+        dancer.update(play_button.pressed)
         my_data.set_bpm(slider.get_bpm())
         my_data.update()
         screen.fill((0, 0, 0))
@@ -82,8 +85,8 @@ def main():
         play_button.draw()
         instrument.draw()
         clear_button.draw()
-        my_data.set_bpm(240)
         slider.draw()
+        dancer.draw()
 
        
         pygame.display.update()
