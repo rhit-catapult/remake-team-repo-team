@@ -1,6 +1,7 @@
 import pygame
 import sys
 import data
+import math
 
 class Slider:
     def __init__(self, screen, track_width, min_value, max_value, initial_value=None):
@@ -24,7 +25,20 @@ class Slider:
         self.text_x = self.group_x + self.track_width + self.spacing
         
     def draw(self):
-        bpm_text = self.font.render(f"Tempo: {self.get_bpm()} BPM", True, self.text_color)
+        # pulse factor oscillates between 0 and 1
+        pulse_period = 4500.0  # milliseconds for a full purple->blue->purple cycle
+        t = pygame.time.get_ticks() % pulse_period
+        f = (math.sin(2 * math.pi * (t / pulse_period)) + 1) / 2
+
+        # darker purple and blue RGB
+        purple = (72, 0, 114)
+        blue = (0, 60, 140)
+        r = int(purple[0] * (1 - f) + blue[0] * f)
+        g = int(purple[1] * (1 - f) + blue[1] * f)
+        b = int(purple[2] * (1 - f) + blue[2] * f)
+        pulse_color = (r, g, b)
+
+        bpm_text = self.font.render(f"Tempo: {self.get_bpm()} BPM", True, pulse_color)
         pygame.draw.rect(self.screen, self.track_color, (self.group_x, self.y, self.track_width, self.height))
         pygame.draw.rect(self.screen, self.fill_color, (self.group_x, self.y, self.width, self.height))
         text_y = self.y + (self.height - bpm_text.get_height()) // 2
