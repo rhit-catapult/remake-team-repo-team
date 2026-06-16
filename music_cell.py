@@ -76,13 +76,9 @@ def main():
     drums_cells = Cell(screen,  my_data_drums)
     clock = pygame.time.Clock()
 
-   
-    my_data_drums.click_drum_at(0,0)
-    my_data_drums.click_drum_at(1,0)
-    my_data_drums.click_drum_at(0,1)
     
     while True:
-        clock.tick(1)
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()

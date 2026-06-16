@@ -21,7 +21,9 @@ def main():
     # button = play_button.Button(screen, 400, 400)
     mouse_pos = mouse_position.MousePosition(screen)
     my_data = data.Data(8, 16)
+    my_drum_data = data.Data(2, 16)
     cell_grid = music_cell.Cell(screen, my_data)
+    drums_cells = music_cell.Cell(screen, my_drum_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
 
@@ -52,15 +54,21 @@ def main():
                 pressed_keys = pygame.key.get_pressed()
                 if pressed_keys[pygame.K_p]:
                     my_data.play()
+            
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse_pos.is_clicked(event.pos):
-                    beat_index, note_index = mouse_pos.find_grid_position()
-                    my_data.click_at(beat_index, note_index)
+                    the_y, beat_index, note_index = mouse_pos.find_grid_position()
+                    if 505 <= the_y <= 605:
+                        my_drum_data.click_drum_at(beat_index, note_index)
+                    else:
+                        my_data.click_at(beat_index, note_index)
 
+        
         
         my_data.update()
         screen.fill((0, 0, 0))
         cell_grid.draw()
+        drums_cells.draw_drums()   
         
         play_button.draw()
         instrument.draw()
