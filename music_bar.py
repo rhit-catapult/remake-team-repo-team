@@ -10,7 +10,7 @@ class Bar:
         self.screen = screen
         self.x = 0
         self.y = 0
-        self.width = 80 
+        self.width = 81.25
         self.height = 605 
 
     def draw(self, what_beat):
