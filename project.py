@@ -31,7 +31,7 @@ def main():
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
     slider = tempo_slider.Slider(screen, 400, 100, 340, initial_value=220)
-    dancer1 = Dancer(screen, 260, 615, image_set= "set1")
+    dancer1 = Dancer(screen, 260, 615, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
