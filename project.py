@@ -60,10 +60,16 @@ def main():
                 elif event.key == pygame.K_s:
                     dialog.open_save()
                     is_showing_dialog = True
+                # elif event.key == pygame.K_w:
+                #     print("Notes:")
+                #     print(my_data.get_all_notes())
+                #     print("Drums:")
+                #     print(my_data.get_all_drums())
             result = dialog.process_event(event)
             if result and result[0] == 'picked':
                 print('Chosen file:', result[1])
                 is_showing_dialog = False
+                my_data.load_from_file(result[1])
             if result and result[0] == 'saved':
                 print('Save filename:', result[1])
                 is_showing_dialog = False

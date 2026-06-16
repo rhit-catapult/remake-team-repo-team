@@ -2,6 +2,7 @@ import music_player
 import time
 import pygame
 import sys
+import json
 
 class Data:
     def __init__(self, number_of_notes, number_of_beats):
@@ -12,7 +13,6 @@ class Data:
         all_drums = []
         self.beat_duration = 0.5  # Duration of each beat in seconds
     
-
         for beat in range(number_of_beats):
             one_beat = []
             for note in range(number_of_notes):
@@ -26,9 +26,7 @@ class Data:
                 one_beat.append(False)
             all_drums.append(one_beat)
         self.drums = all_drums
-
         self.is_playing = False
-
 
     def __repr__(self):
         representation = f"Data(number_of_notes={self.number_of_notes}, number_of_beats={self.number_of_beats})"
@@ -36,12 +34,7 @@ class Data:
             beat = self.notes[k]
             drums = self.drums[k]
             representation += "\n" + str(beat) + "  " + str(drums)
-        
-        
-        
         return representation
-        
-    
     
     def click_at(self, beat_index, note_index):
         if 0 <= beat_index < self.number_of_beats and 0 <= note_index < self.number_of_notes:
@@ -109,7 +102,15 @@ class Data:
                 self.drums[beat][drum] = False
         
         self.stop()
-        
+    
+    def load_from_file(self, file_path):
+ 
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+            self.notes = data['notes']
+            self.drums = data['drums']
+            self.set_bpm(data['tempo'])
+            self.music_player.set_instrument(data['instrument'])
 
 if __name__ == "__main__":
     pygame.init()
