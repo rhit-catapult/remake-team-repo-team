@@ -13,6 +13,7 @@ import tempo_slider
 import image_clear_button
 from dancer import Dancer
 import splash_screen
+import load_save_dialog
 
 
 def main():
@@ -36,6 +37,8 @@ def main():
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
 
+    dialog = load_save_dialog.LoadSaveDialog(screen)
+    is_showing_dialog = False
    
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -50,6 +53,26 @@ def main():
                 is_showing_splashhscreen = False
                 continue  # skip the rest of the loop to avoid processing other events while the splash screen is showing
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_l:
+                    dialog.open_load()
+                    is_showing_dialog = True
+                elif event.key == pygame.K_s:
+                    dialog.open_save()
+                    is_showing_dialog = True
+            result = dialog.process_event(event)
+            if result and result[0] == 'picked':
+                print('Chosen file:', result[1])
+                is_showing_dialog = False
+            if result and result[0] == 'saved':
+                print('Save filename:', result[1])
+                is_showing_dialog = False
+            if result and result[0] == 'closed':
+                is_showing_dialog = False
+
+            if is_showing_dialog:
+                continue  # skip the rest of the loop to avoid processing other events while the dialog is open
+
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if play_button.rect.collidepoint(event.pos):
                     play_button.toggle()
@@ -57,6 +80,8 @@ def main():
                         my_data.play()
                     else:
                         my_data.stop()
+
+
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if instrument.rect.collidepoint(event.pos):
@@ -104,6 +129,7 @@ def main():
         dancer1.draw()
         dancer2.draw()
 
+        dialog.draw()
        
         pygame.display.update()
 

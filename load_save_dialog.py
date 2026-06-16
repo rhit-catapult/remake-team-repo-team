@@ -78,7 +78,7 @@ class LoadSaveDialog:
                 self.save_entry = None
                 self.save_confirm_btn = None
                 self.save_cancel_btn = None
-                return ('picked', self.last_chosen_path)
+                return ('saved', self.last_chosen_path)
             elif getattr(self, 'save_cancel_btn', None) is not None and event.ui_element == self.save_cancel_btn:
                 try:
                     self.save_window.kill()
