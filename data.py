@@ -11,6 +11,7 @@ class Data:
         all_notes = []
         all_drums = []
         self.beat_duration = 0.5  # Duration of each beat in seconds
+    
 
         for beat in range(number_of_beats):
             one_beat = []
@@ -95,11 +96,16 @@ class Data:
     def set_bpm(self, bpm):
         self.beat_duration = 60 / bpm  # Convert BPM to seconds per beat
 
+    def get_bpm(self):
+        return 60 / self.beat_duration  # Convert seconds per beat back to BPM
+        
+
 if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((800, 500))
     data = Data(8, 16)
     data.music_player.set_instrument("piano")
+    slide = data.tempo_slider()
     data.set_bpm(320)
     # data.click_at(0, 0)
     # data.click_at(1, 3)        

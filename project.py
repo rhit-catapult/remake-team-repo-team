@@ -9,6 +9,7 @@ import music_cell
 import image_play_button
 import music_player
 import instrument_button
+import tempo_slider
 
 
 def main():
@@ -25,6 +26,8 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
+    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value= 240)
+
 
    
     # let's set the framerate
@@ -62,7 +65,8 @@ def main():
                         my_data.click_at(beat_index, note_index)
 
         
-        
+        slider.update()
+        my_data.set_bpm(slider.get_bpm())
         my_data.update()
         screen.fill((0, 0, 0))
         cell_grid.draw()
@@ -71,6 +75,7 @@ def main():
         play_button.draw()
         instrument.draw()
         my_data.set_bpm(240)
+        slider.draw()
 
        
         pygame.display.update()
