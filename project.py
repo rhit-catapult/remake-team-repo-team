@@ -30,7 +30,8 @@ def main():
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
     slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value=240)
-    dancer = Dancer(screen)
+    dancer1 = Dancer(screen, 260, 615, image_set= "set1")
+    dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen, 400, 400)
     splash = splash_screen.SplashScreen(screen)
     is_showing_splashhscreen = True
@@ -87,7 +88,9 @@ def main():
             continue  # skip the rest of the loop to avoid updating other elements while the splash screen is showing
 
         slider.update()
-        dancer.update(play_button.pressed)
+        dancer1.update(play_button.pressed, slider.get_bpm())
+        dancer2.update(play_button.pressed, slider.get_bpm())
+
         my_data.set_bpm(slider.get_bpm())
         my_data.update()
         screen.fill((0, 0, 0))
@@ -98,7 +101,8 @@ def main():
         instrument.draw()
         clear_button.draw()
         slider.draw()
-        dancer.draw()
+        dancer1.draw()
+        dancer2.draw()
 
        
         pygame.display.update()
