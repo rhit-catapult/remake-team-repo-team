@@ -104,7 +104,7 @@ def main():
                         need_beat_bar = True
                     else:
                         my_data.stop()
-                        # need_beat_bar = False
+                        need_beat_bar = False
 
 
 
