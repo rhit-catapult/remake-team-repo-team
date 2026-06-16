@@ -48,7 +48,7 @@ class Cell:
 
         drums = self.data.get_all_drums()
         drum_color = (10, 30, 200)
-        print(drums)
+        
         for beat_index in range(16):
             pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, 100))
 
