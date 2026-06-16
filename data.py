@@ -90,6 +90,10 @@ class Data:
             self.current_beat = (self.current_beat + 1) % self.number_of_beats
             self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
+    def get_current_beat(self):
+        print(self.current_beat)
+        return self.current_beat
+    
     def stop(self):
         self.is_playing = False
 
@@ -116,7 +120,7 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((800, 500))
     data = Data(8, 16)
     data.music_player.set_instrument("piano")
-    slide = data.tempo_slider()
+    # slide = data.tempo_slider()
     data.set_bpm(320)
     # data.click_at(0, 0)
     # data.click_at(1, 3)        
@@ -128,10 +132,10 @@ if __name__ == "__main__":
     # data.click_at(0, 0)
     
 
-    data.click_drum_at(0, 0)
-    data.click_drum_at(1, 1)
-    data.click_drum_at(15, 1)
-    print(data.get_all_drums())
+    # data.click_drum_at(0, 0)
+    # data.click_drum_at(1, 1)
+    # data.click_drum_at(15, 1)
+    # print(data.get_all_drums())
     data.play()
 
     while True:
@@ -139,4 +143,5 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 sys.exit()
         data.update()
+        data.get_current_beat()
 
