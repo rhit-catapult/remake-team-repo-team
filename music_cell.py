@@ -37,26 +37,33 @@ class Cell:
             else:
                 next_color += 1
             
-        
+        pygame.draw.rect(self.screen, pygame.Color("Gray"), (0, 610, self.screen.get_width(), 70))
+
+
+    def draw_drums(self):
         self.y = 505
+        self.x = 0
+        self.width = 80
+        spacing_horizontal = 20
+
+        drums = self.data.get_all_drums()
         drum_color = (10, 30, 200)
-        
-        for k in range(16):
+        print(drums)
+        for beat_index in range(16):
             pygame.draw.rect(self.screen, pygame.Color("White"), (self.x, self.y, self.width, 100))
 
-            # if ____ == False:
-            pygame.draw.circle(self.screen, pygame.Color("Gray"), (40 + self.x, 535), 8)
-            #elif ___ == True:
-                #pygame.draw.circle(self.screen, drum_color, (40 + self.x, 535), 8)
+            if  drums[beat_index][0] == False:
+                pygame.draw.circle(self.screen, pygame.Color("Gray"), (40 + self.x, 535), 8)
+            elif drums[beat_index][0] == True:
+                pygame.draw.circle(self.screen, drum_color, (40 + self.x, 535), 8)
                 
-            #if ____ == False:
-            pygame.draw.polygon(self.screen, pygame.Color("Gray"), [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
-            #elif ___ == True:
-                #pygame.draw.polygon(self.screen, drum_color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
+            if drums[beat_index][1] == False:
+                pygame.draw.polygon(self.screen, pygame.Color("Gray"), [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
+            elif drums[beat_index][1] == True:
+                pygame.draw.polygon(self.screen, drum_color, [(40 + self.x, 568), (32 + self.x, 583), (48 + self.x, 583)], 0)
             
             self.x += self.width + (spacing_horizontal / 15)
     
-        pygame.draw.rect(self.screen, pygame.Color("Gray"), (0, 610, self.screen.get_width(), 70))
         
 
 def main():
@@ -64,18 +71,25 @@ def main():
     pygame.display.set_caption("cells")
     screen = pygame.display.set_mode((1300, 680))
     my_data = Data(8, 16)
+    my_data_drums = Data(2, 16)
     cell_grid = Cell(screen, my_data)
+    drums_cells = Cell(screen,  my_data_drums)
     clock = pygame.time.Clock()
 
+   
+    my_data_drums.click_drum_at(0,0)
+    my_data_drums.click_drum_at(1,0)
+    my_data_drums.click_drum_at(0,1)
+    
     while True:
-        clock.tick(60)
+        clock.tick(1)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
         screen.fill(pygame.Color("Black"))
         cell_grid.draw()
-        
+        drums_cells.draw_drums()    
 
         pygame.display.update()
 if __name__ == "__main__":
