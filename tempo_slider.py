@@ -13,19 +13,22 @@ class Slider:
         self.track_width = track_width
         self.height = 10
         self.y = screen.get_height() - self.height - 20
-        self.x = screen.get_width() // 2 - self.track_width // 2
         self.value = initial_value if initial_value is not None else min_value
         self.width = self.value_to_width(self.value)
         self.dragging = False
         self.font = pygame.font.SysFont("jokerman", 24)
+        self.spacing = 15
+        initial_text = self.font.render(f"Tempo: {self.get_bpm()} BPM", True, self.text_color)
+        combined_width = self.track_width + self.spacing + initial_text.get_width()
+        self.group_x = self.screen.get_width() // 2 - combined_width // 2
+        self.text_x = self.group_x + self.track_width + self.spacing
         
     def draw(self):
-        pygame.draw.rect(self.screen, self.track_color, (self.x, self.y, self.track_width, self.height))
-        pygame.draw.rect(self.screen, self.fill_color, (self.x, self.y, self.width, self.height))
         bpm_text = self.font.render(f"Tempo: {self.get_bpm()} BPM", True, self.text_color)
-        text_x = self.x + self.track_width + 15
-        text_y = self.y - bpm_text.get_height() // 2 + self.height // 2
-        self.screen.blit(bpm_text, (text_x, text_y))
+        pygame.draw.rect(self.screen, self.track_color, (self.group_x, self.y, self.track_width, self.height))
+        pygame.draw.rect(self.screen, self.fill_color, (self.group_x, self.y, self.width, self.height))
+        text_y = self.y + (self.height - bpm_text.get_height()) // 2
+        self.screen.blit(bpm_text, (self.text_x, text_y))
 
     def value_to_width(self, value):
         percent = (value - self.min_value) / (self.max_value - self.min_value)
@@ -45,9 +48,9 @@ class Slider:
         mx, my = pygame.mouse.get_pos()
         mouse_down = pygame.mouse.get_pressed()[0]
         if mouse_down:
-            if self.dragging or ((self.x <= mx <= self.x + self.track_width) and (self.y <= my <= self.y + self.height)):
+            if self.dragging or ((self.group_x <= mx <= self.group_x + self.track_width) and (self.y <= my <= self.y + self.height)):
                 self.dragging = True
-                new_width = mx - self.x
+                new_width = mx - self.group_x
                 self.width = max(0, min(new_width, self.track_width))
                 self.value = int(self.width_to_value(self.width))
         else:

@@ -10,6 +10,8 @@ import image_play_button
 import music_player
 import instrument_button
 import tempo_slider
+import image_clear_button
+from dancer import Dancer
 
 
 def main():
@@ -26,8 +28,9 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
-    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value= 240)
-
+    slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value=240)
+    dancer = Dancer(screen)
+    clear_button = image_clear_button.Clear(screen, 400, 400)
 
    
     # let's set the framerate
@@ -51,6 +54,12 @@ def main():
                     instrument.toggle()
                     my_data.music_player.set_instrument(instrument.get_instrument())
 
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if clear_button.is_clicked(event.pos):
+                    my_data.clear_screen()
+                    play_button.reset()
+
+
             if event.type == pygame.KEYDOWN:
                 pressed_keys = pygame.key.get_pressed()
                 if pressed_keys[pygame.K_p]:
@@ -66,6 +75,7 @@ def main():
 
         
         slider.update()
+        dancer.update(play_button.pressed)
         my_data.set_bpm(slider.get_bpm())
         my_data.update()
         screen.fill((0, 0, 0))
@@ -74,8 +84,9 @@ def main():
         
         play_button.draw()
         instrument.draw()
-        my_data.set_bpm(240)
+        clear_button.draw()
         slider.draw()
+        dancer.draw()
 
        
         pygame.display.update()

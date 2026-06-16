@@ -98,6 +98,17 @@ class Data:
 
     def get_bpm(self):
         return 60 / self.beat_duration  # Convert seconds per beat back to BPM
+    
+    def clear_screen(self):
+        for beat in range(self.number_of_beats):
+            for note in range(self.number_of_notes):
+                self.notes[beat][note] = False
+
+        for beat in range(self.number_of_beats):
+            for drum in range(2):
+                self.drums[beat][drum] = False
+        
+        self.stop()
         
 
 if __name__ == "__main__":
