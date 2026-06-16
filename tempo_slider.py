@@ -37,6 +37,13 @@ class Slider:
         pulse_color = (int(r_f * 255), int(g_f * 255), int(b_f * 255))
 
         bpm_text = self.font.render(f"Tempo: {self.get_bpm()} BPM", True, pulse_color)
+        # draw outer border first so the slider looks clearer
+        pygame.draw.rect(
+            self.screen,
+            (0, 0, 0),
+            (self.group_x - 3, self.y - 3, self.track_width + 5, self.height + 5),
+            3,
+        )
         pygame.draw.rect(self.screen, self.track_color, (self.group_x, self.y, self.track_width, self.height))
         pygame.draw.rect(self.screen, self.fill_color, (self.group_x, self.y, self.width, self.height))
         text_y = self.y + (self.height - bpm_text.get_height()) // 2

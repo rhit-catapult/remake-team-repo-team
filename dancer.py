@@ -2,7 +2,7 @@ import pygame
 import sys
 
 class Dancer:
-    IMAGE_SETS = { # dancer sprites go in theese sets set 1 is the right and set 2 is on the left
+    IMAGE_SETS = { # dancer sprites go in theese sets set 1 is to the left and set 2 is on the right
         "set1": [
             "pause.png",
             "play.png",
