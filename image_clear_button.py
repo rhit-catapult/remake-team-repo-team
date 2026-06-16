@@ -12,10 +12,8 @@ class Clear:
         self.clear_image = pygame.transform.scale(self.clear_image, (IMAGE_SIZE, IMAGE_SIZE))
         self.rect = self.clear_image.get_rect(center=(self.x + 800, self.y + 245))
         
-
     def draw(self):
         self.screen.blit(self.clear_image, self.rect)
-
 
 
 def clear_button():
@@ -26,7 +24,7 @@ def clear_button():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-            
+        
         
         clear_button.draw()
         

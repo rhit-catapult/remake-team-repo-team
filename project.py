@@ -10,6 +10,7 @@ import image_play_button
 import music_player
 import instrument_button
 import tempo_slider
+import image_clear_button
 
 
 def main():
@@ -27,7 +28,7 @@ def main():
     play_button = image_play_button.Button(screen, 400, 400)
     instrument = instrument_button.Instrument(screen, 400, 400)
     slider = tempo_slider.Slider(screen, 400, 80, 340, initial_value= 240)
-
+    clear_button = image_clear_button.Clear(screen, 400, 400)
 
    
     # let's set the framerate
@@ -50,6 +51,12 @@ def main():
                 if instrument.rect.collidepoint(event.pos):
                     instrument.toggle()
                     my_data.music_player.set_instrument(instrument.get_instrument())
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if clear_button.is_clicked(event.pos):
+                    my_data.clear_screen()
+                    play_button = self.base_color
+
 
             if event.type == pygame.KEYDOWN:
                 pressed_keys = pygame.key.get_pressed()
@@ -74,6 +81,7 @@ def main():
         
         play_button.draw()
         instrument.draw()
+        clear_button.draw()
         my_data.set_bpm(240)
         slider.draw()
 
