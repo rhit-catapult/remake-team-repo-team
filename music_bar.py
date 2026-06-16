@@ -12,10 +12,7 @@ class Bar:
         self.height = 605 
 
     def draw(self, current_beat):
-        if current_beat == 0:
-            current_beat = 0
-        else:
-            current_beat = (self.width * current_beat) - self.width
+        current_beat = self.width * current_beat
         surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
         surface.fill((0, 100, 255, 30))
         self.screen.blit(surface, (current_beat, 0))
@@ -37,7 +34,7 @@ def main():
 
         screen.fill(pygame.Color("White"))
         
-        bar.draw(my_data.get_current_beat())
+        bar.draw(my_data.get_display_beat())
     
         pygame.display.update()
 if __name__ == "__main__":

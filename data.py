@@ -84,10 +84,10 @@ class Data:
             self.current_beat = (self.current_beat + 1) % self.number_of_beats
             self.next_beat_time = current_time + self.beat_duration  # Adjust the beat duration as needed
 
-    def get_current_beat(self):
-        print(self.current_beat)
-        return self.current_beat + 1
-    
+    def get_display_beat(self):
+        return (self.current_beat - 1) % self.number_of_beats
+        
+
     def stop(self):
         self.is_playing = False
 
@@ -155,5 +155,5 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 sys.exit()
         data.update()
-        data.get_current_beat()
+        data.get_display_beat()
 

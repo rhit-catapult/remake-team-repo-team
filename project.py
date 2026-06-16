@@ -101,7 +101,7 @@ def main():
                         need_beat_bar = True
                     else:
                         my_data.stop()
-                        need_beat_bar = False
+                        # need_beat_bar = False
 
 
 
@@ -153,7 +153,7 @@ def main():
         dancer1.draw()
         dancer2.draw()
         if need_beat_bar == True:
-            beat_bar.draw(my_data.get_current_beat() - 1)
+            beat_bar.draw(my_data.get_display_beat())
         
         load.draw()
         save.draw()
