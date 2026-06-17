@@ -45,6 +45,8 @@ def main():
     is_showing_splashhscreen = True
     beat_bar = Bar(screen)
     need_beat_bar = False
+    is_dragging_notes = False
+    last_note_cell = None
 
     dialog = load_save_dialog.LoadSaveDialog(screen)
     is_showing_dialog = False
@@ -125,13 +127,28 @@ def main():
                 if pressed_keys[pygame.K_p]:
                     my_data.play()
             
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_pos.is_clicked(event.pos):
-                    the_y, beat_index, note_index = mouse_pos.find_grid_position()
-                    if 505 <= the_y <= 605:
-                        my_data.click_drum_at(beat_index, note_index)
-                    else:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                mouse_pos.x, mouse_pos.y = event.pos
+                the_y, beat_index, note_index = mouse_pos.find_grid_position()
+                if 0 <= the_y <= 505 and 0 <= beat_index < 16 and 0 <= note_index < 8:
+                    my_data.click_at(beat_index, note_index)
+                    is_dragging_notes = True
+                    last_note_cell = (beat_index, note_index)
+                elif 505 <= the_y <= 605 and note_index != -1:
+                    my_data.click_drum_at(beat_index, note_index)
+
+            if event.type == pygame.MOUSEMOTION and event.buttons[0]:
+                mouse_pos.x, mouse_pos.y = event.pos
+                the_y, beat_index, note_index = mouse_pos.find_grid_position()
+                if is_dragging_notes and 0 <= the_y <= 505 and 0 <= beat_index < 16 and 0 <= note_index < 8:
+                    current_cell = (beat_index, note_index)
+                    if current_cell != last_note_cell:
                         my_data.click_at(beat_index, note_index)
+                        last_note_cell = current_cell
+
+            if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                is_dragging_notes = False
+                last_note_cell = None
 
         if is_showing_splashhscreen:
             splash.draw()
