@@ -34,7 +34,7 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen)
     instrument = instrument_button.Instrument(screen)
-    tempo_bar = tempo_slider.Slider(screen, 400, 100, 340, initial_value = 220)
+    tempo_bar = tempo_slider.Slider(screen, 400, 100, 240, initial_value = 220)
     volume_slider = volume.VolumeSlider(screen, 300, 0, 100, initial_value = 50)
     dancer1 = Dancer(screen, 260, 610, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
@@ -116,6 +116,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if clear_button.is_clicked(event.pos):
                     my_data.clear_screen()
+                    need_beat_bar = False
                     play_button.reset()
 
 

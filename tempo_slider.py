@@ -19,7 +19,7 @@ class Slider:
         self.value = initial_value if initial_value is not None else min_value
         self.width = self.value_to_width(self.value)
         self.dragging = False
-        self.font = pygame.font.SysFont("jokerman", 23)
+        self.font = pygame.font.SysFont("footlight", 25, bold = True)
         self.spacing = 10
         # milliseconds for a full hue cycle; adjustable
         self.pulse_period = pulse_period
