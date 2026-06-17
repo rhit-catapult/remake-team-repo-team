@@ -116,6 +116,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if clear_button.is_clicked(event.pos):
                     my_data.clear_screen()
+                    need_beat_bar = False
                     play_button.reset()
 
 
