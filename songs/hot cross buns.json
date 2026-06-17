@@ -45,7 +45,7 @@
             false,
             false,
             false,
-            false,
+            true,
             false,
             true,
             false
@@ -126,6 +126,16 @@
             false,
             false,
             false,
+            false,
+            true,
+            false
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+            false,
             true,
             false,
             false
@@ -149,16 +159,6 @@
             false,
             false,
             true
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
         ]
     ],
     "drums": [
@@ -227,6 +227,6 @@
             false
         ]
     ],
-    "tempo": 220.00000000000003,
+    "tempo": 194.0,
     "instrument": "violin"
 }
