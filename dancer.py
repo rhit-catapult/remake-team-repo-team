@@ -51,7 +51,7 @@ class Dancer:
         """Convert BPM to a frame delay in milliseconds."""
         # Use a shorter delay at higher BPM so the dancer animation speeds up.
         # This formula gives roughly two dancer frames per beat.
-        delay = 65000 / bpm / 2
+        delay = 55000 / bpm / 2
         return max(30, delay)
 
     def update(self, playing: bool, bpm: float | None = None):
