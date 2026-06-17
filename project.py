@@ -36,7 +36,7 @@ def main():
     instrument = instrument_button.Instrument(screen)
     tempo_bar = tempo_slider.Slider(screen, 400, 100, 340, initial_value = 220)
     volume_slider = volume.VolumeSlider(screen, 300, 0, 100, initial_value = 50)
-    dancer1 = Dancer(screen, 260, 615, image_set = "set1")
+    dancer1 = Dancer(screen, 260, 610, image_set = "set1")
     dancer2 = Dancer(screen, 975, 615, image_set = "set2")
     clear_button = image_clear_button.Clear(screen)
     load = load_button.LoadButton(screen)
@@ -95,7 +95,7 @@ def main():
                 elif event.key == pygame.K_s:
                     dialog.open_save()
                     is_showing_dialog = True
-                    
+
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if play_button.rect.collidepoint(event.pos):
                     play_button.toggle()

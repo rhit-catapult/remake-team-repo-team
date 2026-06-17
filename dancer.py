@@ -20,7 +20,7 @@ class Dancer:
         screen: pygame.Surface,
         x,
         y,
-        size=(60, 60),
+        size=(70, 70),
         image_set: str = "set1",
         image_paths: list[str] | None = None,
     ):
