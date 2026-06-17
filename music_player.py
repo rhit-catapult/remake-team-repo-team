@@ -6,6 +6,7 @@ import math
 
 class MusicPlayer:
     def __init__(self):
+        pygame.mixer.set_num_channels(64)
         self.current_instrument = "violin"
         self.violin_sounds = []
         self.sax_sounds = []
