@@ -4,9 +4,9 @@ import sys
 class Dancer:
     IMAGE_SETS = { # dancer sprites go in theese sets set 1 is to the left and set 2 is on the right
         "set1": [
-            "pause.png",
-            "play.png",
-            "sax_button.png",
+            "green_dancer_one.png",
+            "green_dancer_two.png",
+            "green_dancer_three.png",
         ],
         "set2": [
             "play.png",
