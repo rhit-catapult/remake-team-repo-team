@@ -36,7 +36,7 @@ def main():
     instrument = instrument_button.Instrument(screen)
     tempo_bar = tempo_slider.Slider(screen, 400, 100, 240, initial_value = 220)
     volume_slider = volume.VolumeSlider(screen, 300, 0, 100, initial_value = 50)
-    dancer1 = Dancer(screen, 265, 610, image_set = "set1")
+    dancer1 = Dancer(screen, 262, 610, image_set = "set1")
     dancer2 = Dancer(screen, 970, 610, image_set = "set2")
     clear_button = image_clear_button.Clear(screen)
     load = load_button.LoadButton(screen)
