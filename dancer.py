@@ -9,9 +9,9 @@ class Dancer:
             "green_dancer_three.png",
         ],
         "set2": [
-            "play.png",
-            "play.png",
-            "pause.png",
+            "purple_dancer_one.png",
+            "purple_dancer_two.png",
+            "purple_dancer_three.png",
         ],
     }
 
