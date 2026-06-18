@@ -34,7 +34,7 @@ def main():
     drums_cells = music_cell.Cell(screen, my_data)
     play_button = image_play_button.Button(screen)
     instrument = instrument_button.Instrument(screen)
-    tempo_bar = tempo_slider.Slider(screen, 400, 100, 440, initial_value = 25000)
+    tempo_bar = tempo_slider.Slider(screen, 400, 100, 640, initial_value = 25000)
     volume_slider = volume.VolumeSlider(screen, 300, 0, 100, initial_value = 100)
     dancer1 = Dancer(screen, 262, 610, image_set = "set1")
     dancer2 = Dancer(screen, 970, 610, image_set = "set2")
@@ -54,7 +54,7 @@ def main():
     # let's set the framerate
     clock = pygame.time.Clock()
     while True:
-        clock.tick(60)  # this sets the framerate of your game
+        clock.tick(120)  # this sets the framerate of your game
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
